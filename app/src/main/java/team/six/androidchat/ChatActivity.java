@@ -8,9 +8,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class ChatActivity extends AppCompatActivity {
+
+    private TextView textView;
+    private EditText sessionNumber;
+
+    public void refreshActivity()
+    {
+        new ConnectActivity(textView, ConnectActivity.ACTION.GET).execute();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +29,16 @@ public class ChatActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView textView = (TextView) findViewById(R.id.textView);
+        textView = (TextView) findViewById(R.id.textView);
+        sessionNumber = (EditText) findViewById(R.id.sessionNumberInput);
+        sessionNumber.setText("1");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new ConnectActivity().execute();
+                String sessionNumberValue = sessionNumber.getText().toString();
+                new ConnectActivity(textView, ConnectActivity.ACTION.GET).execute(sessionNumberValue);
             }
         });
     }

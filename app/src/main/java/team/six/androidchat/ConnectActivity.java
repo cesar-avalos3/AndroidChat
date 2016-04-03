@@ -1,7 +1,10 @@
 package team.six.androidchat;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.text.Html;
 import android.util.Log;
+import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -30,32 +33,57 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
     ACTION state;
     HttpGet req;
 
+    TextView chatText;
+    Context context;
+
     public enum ACTION {GET, POST};
 
     public void onPreExecute()
     {
+
     }
 
-    protected void onPostExecute()
+    protected void onPostExecute(String results)
     {
+        this.chatText.setText(Html.fromHtml(results));
     }
 
     protected String doInBackground(String... arg0)
     {
-        if(state == ACTION.GET)
-        {
-            get("http://people.eecs.ku.edu/~cavalosb/AndroidChat/androidChat.php");
+        if(state == ACTION.GET) {
+            try {
+                String sessionNumber = arg0[0];
+                req.setURI(new URI("http://people.eecs.ku.edu/~cavalosb/AndroidChat/AndroidChatReceive.php?session_number="+sessionNumber));
+                HttpResponse res = client.execute(req);
+                BufferedReader input = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
+
+                StringBuffer stringB = new StringBuffer(" ");
+                String line = input.readLine();
+                while (line != null) {
+                    stringB.append(line);
+                    line = input.readLine();
+                }
+                input.close();
+                return stringB.toString();
+            } catch (Exception e) {
+                Log.e("Error: ", e.getMessage());
+            }
         }
-        return "Ble";
+        else
+        {
+            // Post things
+        }
+        return "This is not supposed to happen";
     }
 
-    public ConnectActivity()
+    public ConnectActivity(TextView chatText, ACTION state)
     {
         //Default make GET the state
-        state = ACTION.GET;
-        client = new DefaultHttpClient();
-        req = new HttpGet();
-
+        this.state = state;
+        //this.context = context;
+        this.chatText = chatText;
+        this.client = new DefaultHttpClient();
+        this.req = new HttpGet();
     }
 
     public void toggleState()
@@ -68,30 +96,6 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
         {
             state = ACTION.GET;
         }
-    }
-
-    public String get(String link)
-    {
-        try {
-            url = new URL(link);
-            con = url.openConnection();
-            req.setURI(new URI(link));
-            HttpResponse res = client.execute(req);
-            BufferedReader input = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
-            StringBuffer stringB = new StringBuffer(" ");
-            String line = "";
-            while((line = input.readLine()) != null)
-            {
-                stringB.append(line);
-                break;
-            }
-            input.close();
-            return stringB.toString();
-        }catch(Exception e)
-        {
-            Log.e("Error: ",e.getMessage());
-        }
-        return "This is not supposed to happen";
     }
 
 }
