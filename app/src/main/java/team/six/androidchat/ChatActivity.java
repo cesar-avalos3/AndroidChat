@@ -1,6 +1,7 @@
 package team.six.androidchat;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,15 @@ public class ChatActivity extends AppCompatActivity {
 
     private TextView textView;
     private EditText sessionNumber;
+
+    Handler handler = new Handler();
+    Runnable timedTask = new Runnable(){
+
+        @Override
+        public void run() {
+            getChatMessages();
+            handler.postDelayed(timedTask, 1000);
+        }};
 
     public void refreshActivity()
     {
@@ -37,8 +47,8 @@ public class ChatActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String sessionNumberValue = sessionNumber.getText().toString();
-                new ConnectActivity(textView, ConnectActivity.ACTION.GET).execute(sessionNumberValue);
+                getChatMessages();
+                handler.post(timedTask);
             }
         });
     }
@@ -63,5 +73,11 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void getChatMessages()
+    {
+        String sessionNumberValue = sessionNumber.getText().toString();
+        new ConnectActivity(textView, ConnectActivity.ACTION.GET).execute(sessionNumberValue);
     }
 }
