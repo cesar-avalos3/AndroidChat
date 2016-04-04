@@ -36,8 +36,6 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_chat);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         textView = (TextView) findViewById(R.id.textView);
         sessionNumber = (EditText) findViewById(R.id.sessionNumberInput);
