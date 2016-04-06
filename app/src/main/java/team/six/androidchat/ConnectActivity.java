@@ -58,6 +58,7 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
                 BufferedReader input = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
 
                 StringBuffer stringB = new StringBuffer(" ");
+                //reading thigns in
                 String line = input.readLine();
                 while (line != null) {
                     stringB.append(line);

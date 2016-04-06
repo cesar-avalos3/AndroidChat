@@ -15,23 +15,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:id="@+id/textView2" />
+        android:text="Enter Text to be added to chat"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="220dp"
         android:layout_height="300dp"
         android:text="New Text"
         android:id="@+id/textView"
-        android:layout_marginTop="36dp"
-        android:layout_below="@+id/textView2"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/inputText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/sessionNumberInput"
+        android:layout_marginTop="25dp"
+        android:inputType="text" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/sessionNumberInput"
+        android:inputType="number"
         android:layout_below="@+id/textView"
-        android:layout_alignParentEnd="true"
-        android:inputType="number" />
+        android:layout_toEndOf="@+id/textView" />
 </RelativeLayout>
