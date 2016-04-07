@@ -86,7 +86,7 @@ public class ChatActivity extends AppCompatActivity {
     {
         String sessionNumberValue = sessionNumber.getText().toString();
         String stringToAdd = inputTextstring.getText().toString();
-        String authorToAdd = input2Textstring.getText().toString();
+        String authorToAdd = inputTextstring.getText().toString();
         new SendingMessage(textView, SendingMessage.ACTION.GET).execute(sessionNumberValue,stringToAdd,authorToAdd);
     }
 }
