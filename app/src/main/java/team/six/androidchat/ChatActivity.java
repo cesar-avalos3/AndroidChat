@@ -17,6 +17,7 @@ public class ChatActivity extends AppCompatActivity {
     private TextView textView;
     private EditText sessionNumber;
     private EditText inputTextstring;
+    private EditText input2Textstring;
 
     Handler handler = new Handler();
     Runnable timedTask = new Runnable(){
@@ -41,8 +42,10 @@ public class ChatActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.textView);
         sessionNumber = (EditText) findViewById(R.id.sessionNumberInput);
         inputTextstring = (EditText) findViewById(R.id.inputText);
+        input2Textstring = (EditText) findViewById(R.id.input2Text);
         sessionNumber.setText("1");
         inputTextstring.setText("Please Input your text here");
+        inputTextstring.setText("Author here");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +87,9 @@ public class ChatActivity extends AppCompatActivity {
     }
     public void sendMessages()
     {
+        String sessionNumberValue = sessionNumber.getText().toString();
         String stringToAdd = inputTextstring.getText().toString();
-        new SendingMessage();
+        String authorToAdd = input2Textstring.getText().toString();
+        new SendingMessage(textView, SendingMessage.ACTION.GET).execute(sessionNumberValue,stringToAdd,authorToAdd);
     }
 }
