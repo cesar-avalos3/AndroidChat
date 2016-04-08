@@ -48,6 +48,8 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
         this.chatText.setText(Html.fromHtml(results));
     }
 
+    //Overrid method from AsyncTask
+    //Takes an array of strings that can be an arbitrary number of parameters
     protected String doInBackground(String... arg0)
     {
         if(state == ACTION.GET) {
