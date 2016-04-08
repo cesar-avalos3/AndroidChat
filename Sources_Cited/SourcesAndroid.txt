@@ -1,0 +1,12 @@
+http://developer.android.com/reference/java/net/HttpURLConnection.html
+http://developer.android.com/training/basics/fragments/creating.html
+http://developer.android.com/reference/android/graphics/drawable/BitmapDrawable.html
+http://developer.android.com/guide/topics/ui/themes.html
+http://developer.android.com/samples/BasicMultitouch/res/values-v11/styles.html
+http://developer.android.com/training/keyboard-input/visibility.html#Respond
+http://developer.android.com/reference/android/os/AsyncTask.html
+http://developer.android.com/reference/java/net/URL.html#openConnection()
+http://developer.android.com/training/basics/network-ops/xml.html
+http://developer.android.com/training/basics/network-ops/connecting.html
+http://developer.android.com/training/basics/network-ops/index.html
+http://developer.android.com/samples/BluetoothChat/index.html

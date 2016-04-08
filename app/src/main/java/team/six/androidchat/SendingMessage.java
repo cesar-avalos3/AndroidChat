@@ -66,12 +66,11 @@ public class SendingMessage  extends AsyncTask<String, Void, String>  {
         return "bnelh";
     }
 
-    public SendingMessage(TextView chatText)
+    public SendingMessage()
     {
         //Default make GET the state
         this.state = state;
         //this.context = context;
-        this.chatText = chatText;
         this.client = new DefaultHttpClient();
         this.req = new HttpGet();
     }
