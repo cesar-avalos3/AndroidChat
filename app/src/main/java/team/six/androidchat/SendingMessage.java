@@ -21,6 +21,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 
 /**
  * Created by Yarden on 4/5/2016.
@@ -37,31 +38,35 @@ public class SendingMessage  extends AsyncTask<String, Void, String>  {
 
     public enum ACTION {GET, POST};
 
+    protected void onPostExecute(String results){}
+
+    protected void onPreExecute(){}
+
     protected String doInBackground(String... arg0)
     {
-        if(state == ACTION.GET) {
-            try {
-                String sessionNumber = arg0[0];
-                String message_content = arg0[1];
-                String message_author = arg0[2];
-                req.setURI(new URI("http://people.eecs.ku.edu/~cavalosb/AndroidChat/AndroidChatTransmit.php?session_number="+sessionNumber+"&message_content="+message_content+"&message_author="+message_author));
-                HttpResponse res = client.execute(req);
+        String sessionNumber = arg0[0];
+        String message_content = arg0[1];
+        String message_author = arg0[2];
+        try {
+            String urlLink = "http://people.eecs.ku.edu/~cavalosb/AndroidChat/AndroidChatTransmit.php?session_number=" + URLEncoder.encode(sessionNumber, "utf-8")+ "&message_content=" + URLEncoder.encode(message_content, "utf-8") + "&message_author=" + URLEncoder.encode(message_author, "utf-8");
+            url = new URL(urlLink);
+            Log.d("Tag", urlLink);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                try
+                {
+                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                }finally
+                {
+                    urlConnection.disconnect();
+                }
                 System.out.println("here");
-
-
-
             } catch (Exception e) {
                 Log.e("Error: ", e.getMessage());
             }
-        }
-        else
-        {
-            // Post things
-        }
-        return "This is not supposed to happen";
+        return "bnelh";
     }
 
-    public SendingMessage(TextView chatText, ACTION state)
+    public SendingMessage(TextView chatText)
     {
         //Default make GET the state
         this.state = state;

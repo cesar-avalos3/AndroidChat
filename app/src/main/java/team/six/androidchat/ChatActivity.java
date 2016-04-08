@@ -83,11 +83,19 @@ public class ChatActivity extends AppCompatActivity {
             //Method to define what happens when the button is clicked
             //Call the sendMessages and getChatMessages when the email red button is clicked
             public void onClick(View view) {
-                getChatMessages();
                 sendMessages();
+            }
+        });
+
+        FloatingActionButton connect = (FloatingActionButton) findViewById(R.id.connect);
+        connect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getChatMessages();
                 handler.post(timedTask);
             }
         });
+
     }
 
 
@@ -126,6 +134,6 @@ public class ChatActivity extends AppCompatActivity {
         String sessionNumberValue = sessionNumber.getText().toString();
         String stringToAdd = inputTextstring.getText().toString();
         String authorToAdd = authorText.getText().toString();
-        new SendingMessage(textView, SendingMessage.ACTION.GET).execute(sessionNumberValue,stringToAdd,authorToAdd);
+        new SendingMessage(textView).execute(sessionNumberValue,stringToAdd,authorToAdd);
     }
 }
