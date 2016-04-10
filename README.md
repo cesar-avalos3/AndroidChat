@@ -8,7 +8,7 @@ The six main Java Files we edited are located in AndroidChat/app/src/main/java/t
   2. ChatActivity.java - Main activity where all session messages and user input is displayed
   3. ConnectActivity.java - Helper file used in main activity for getting messages 
   4. SendingMessage.java - Helper file used in main activity for sending messages
-  5.,6. Message.java, Sending.java - Files not currently integrated, but will be used in the future 
+  5. Message.java and Sending.java - Files not currently integrated, but will be used in the future 
   
 The two layout files we edited are AndroidChat/app/src/main/res/layout
 
