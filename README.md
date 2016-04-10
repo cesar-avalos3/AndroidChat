@@ -10,7 +10,7 @@ The six main Java Files we edited are located in AndroidChat/app/src/main/java/t
   4. SendingMessage.java - Helper file used in main activity for sending messages
   5. Message.java and Sending.java - Files not currently integrated, but will be used in the future 
   
-The two layout files we edited are AndroidChat/app/src/main/res/layout
+The two layout files we edited are locate in AndroidChat/app/src/main/res/layout
 
  
  PHP Files/SQL Interaction are stored in a seperated Github Repo https://github.com/cesar-avalos3/AndroidChatServers
