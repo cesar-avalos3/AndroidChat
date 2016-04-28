@@ -159,11 +159,11 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
 
             //Catch any errors
             catch (Exception e) {
-                Log.e("Error: ", e.getMessage());
+                Log.e("Not able to connect: ", e.getMessage());
             }
         }
 
-        //Return empty string as deafault
+        //Return empty string as default
         return "";
     }
 
