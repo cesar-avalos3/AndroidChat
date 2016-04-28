@@ -56,6 +56,8 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
      */
     HttpClient client;
 
+    boolean dontdothisAuthentication = false;
+
     /**
      * Define a instance variable of Type Action (where ACTION is the enum above). Either get or post request
      */
@@ -114,6 +116,30 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
         this.chatText.setText(Html.fromHtml(results));
     }
 
+    protected void authenticate()
+    {
+        try {
+            req.setURI(new URI("http://10.0.2.2:8888/login.php"));
+            HttpResponse res = client.execute(req);
+            BufferedReader input = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
+            StringBuffer stringB = new StringBuffer(" ");
+            String line = input.readLine();
+            while (line != null) {
+                //Append new strings
+                stringB.append(line);
+                line = input.readLine();
+            }
+            //Close the input
+            input.close();
+            if(stringB.toString() == "Correctamundo")
+            {
+                dontdothisAuthentication = true;
+            }
+        }catch (Exception e)
+        {
+            Log.e("di't work like dis:", e.getMessage());
+        }
+    }
 
 
     /**
@@ -125,7 +151,7 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... arg0)
     {
         //If the action is a get HTTP request
-        if(state == ACTION.GET) {
+        if(state == ACTION.GET && dontdothisAuthentication) {
             try {
                 //Store the session number which is the first parameter passed in
                 String sessionNumber = arg0[0];

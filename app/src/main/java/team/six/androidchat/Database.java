@@ -25,7 +25,6 @@ public class Database extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db)
     {
         db.execSQL("CREATE TABLE " + TABLE_NAME + "(" + COLUMN_POST_ID + " INTEGER, " + COLUMN_AUTHOR + " VARCHAR(255), " + COLUMN_TEXT + "VARCHAR(2048), " + COLUMN_SESSION + " INTEGER, PRIMARY KEY ("+COLUMN_POST_ID+","+COLUMN_SESSION+")");
-
     }
 
     public void onUpgrade(SQLiteDatabase db, int n, int y)
