@@ -10,17 +10,19 @@
 package team.six.androidchat;
 
 //Deafult import for Bundle used in onCreate
+import android.accounts.AuthenticatorException;
 import android.os.Bundle;
 
 //Handler class so that we can auto refresh the session rooms messages page
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 
-//Base clas for any activity
+//Base class for any activity
 import android.support.v7.app.AppCompatActivity;
 
 //Defaults imports for menus
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -28,6 +30,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.net.Authenticator;
+
 
 /**
  * <p>
@@ -37,7 +42,7 @@ import android.widget.TextView;
  * @author Cesar Avalos, Alec Knutsen
  * @see AppCompatActivity
  */
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity implements AsyncResponse{
 
     /**
      * Instane variable associated with displaying all messages in a specified session
@@ -59,7 +64,7 @@ public class ChatActivity extends AppCompatActivity {
      */
     private EditText authorText;
 
-
+    private boolean authbool = false;
 
     //A Handler allows you to send and process Message and Runnable objects associated
     //with a thread's MessageQueue.
@@ -131,8 +136,11 @@ public class ChatActivity extends AppCompatActivity {
             //Method to define what happens when the button is clicked
             //Call the sendMessages when the email red button is clicked
             public void onClick(View view) {
-                sendMessages();
-                handler.post(timedTask);
+                if(authbool)
+                {
+                    sendMessages();
+                    handler.post(timedTask);
+                }
             }
         });
 
@@ -143,9 +151,25 @@ public class ChatActivity extends AppCompatActivity {
                     //Method to define what happens when the button is clicked
                     //Call the getMessages when the sync red button is clicked
                     @Override public void onClick(View v) {
-                                getChatMessages();
-                                handler.post(timedTask);
-                 }
+                        if(authbool) {
+                            getChatMessages();
+                            handler.post(timedTask);
+                        }
+                        else
+                        {
+                            try {
+                                Authentication au = (Authentication) new Authentication(new AsyncResponse()
+                                {
+                                    @Override
+                                    public void result(boolean output) {
+                                    authbool = output;
+                                    }
+                                }).execute();
+                            }catch(Exception e)
+                            {
+                            }
+                        }
+                    }
         });
     }
 
@@ -207,5 +231,10 @@ public class ChatActivity extends AppCompatActivity {
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
         new SendingMessage().execute(sessionNumberValue,stringToAdd,authorToAdd);
+    }
+
+    @Override
+    public void result(boolean output) {
+        authbool = output;
     }
 }

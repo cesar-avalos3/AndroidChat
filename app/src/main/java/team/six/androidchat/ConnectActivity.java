@@ -28,12 +28,19 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URI;
 
 //Used for reading input from a file
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
+import java.net.URL;
+import java.net.URLEncoder;
 
 
 /**
@@ -116,32 +123,6 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
         this.chatText.setText(Html.fromHtml(results));
     }
 
-    protected void authenticate()
-    {
-        try {
-            req.setURI(new URI("http://10.0.2.2:8888/login.php"));
-            HttpResponse res = client.execute(req);
-            BufferedReader input = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
-            StringBuffer stringB = new StringBuffer(" ");
-            String line = input.readLine();
-            while (line != null) {
-                //Append new strings
-                stringB.append(line);
-                line = input.readLine();
-            }
-            //Close the input
-            input.close();
-            if(stringB.toString() == "Correctamundo")
-            {
-                dontdothisAuthentication = true;
-            }
-        }catch (Exception e)
-        {
-            Log.e("di't work like dis:", e.getMessage());
-        }
-    }
-
-
     /**
      * Submits an HTTP get request in the background of the app
      *
@@ -151,7 +132,7 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... arg0)
     {
         //If the action is a get HTTP request
-        if(state == ACTION.GET && dontdothisAuthentication) {
+        if(state == ACTION.GET) {
             try {
                 //Store the session number which is the first parameter passed in
                 String sessionNumber = arg0[0];
