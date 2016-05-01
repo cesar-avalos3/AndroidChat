@@ -64,6 +64,8 @@ public class ChatActivity extends AppCompatActivity implements AsyncResponse{
      */
     private EditText authorText;
 
+    private String currentSessionNumber;
+
     private boolean authbool = false;
 
     //A Handler allows you to send and process Message and Runnable objects associated
@@ -152,12 +154,17 @@ public class ChatActivity extends AppCompatActivity implements AsyncResponse{
                     //Call the getMessages when the sync red button is clicked
                     @Override public void onClick(View v) {
                         if(authbool) {
+
+                            //Different behavior now, whatever the chat session it currently is at
+                            //when we click the button, this is what timedTask is going to call
+                            currentSessionNumber = sessionNumber.getText().toString();
                             getChatMessages();
                             handler.post(timedTask);
                         }
                         else
                         {
                             try {
+                                //Async tasks are painful
                                 Authentication au = (Authentication) new Authentication(new AsyncResponse()
                                 {
                                     @Override
@@ -207,12 +214,10 @@ public class ChatActivity extends AppCompatActivity implements AsyncResponse{
     public void getChatMessages()
     {
         //Gets the current session number for the input box
-        String sessionNumberValue = sessionNumber.getText().toString();
-
         //Create an instance of the ConnectActivity  Class
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
-        new ConnectActivity(textView, ConnectActivity.ACTION.GET).execute(sessionNumberValue);
+        new ConnectActivity(textView, ConnectActivity.ACTION.GET).execute(currentSessionNumber);
     }
 
     /**
@@ -220,8 +225,6 @@ public class ChatActivity extends AppCompatActivity implements AsyncResponse{
      */
     public void sendMessages()
     {
-        //Get the session number from the sessionNumber textBox
-        String sessionNumberValue = sessionNumber.getText().toString();
         //Get the message context from the inpuTextstring textbox
         String stringToAdd = inputTextstring.getText().toString();
         //Get the author from the authorText textbox
@@ -230,7 +233,7 @@ public class ChatActivity extends AppCompatActivity implements AsyncResponse{
         //Create an instance of the Sending Message Class
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
-        new SendingMessage().execute(sessionNumberValue,stringToAdd,authorToAdd);
+        new SendingMessage().execute(currentSessionNumber,stringToAdd,authorToAdd);
     }
 
     @Override
