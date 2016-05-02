@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-
     protected void onCreate(Bundle savedInstance)
     {
         super.onCreate(savedInstance);
@@ -31,6 +30,7 @@ public class MainActivity extends AppCompatActivity
     {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(new FragmentLogin(), "LOGIN");
+        viewPagerAdapter.addFragment(new FragmentSessions(), "SESSIONS");
         viewPagerAdapter.addFragment(new FragmentChat(), "CHAT");
 
         viewPager.setAdapter(viewPagerAdapter);
