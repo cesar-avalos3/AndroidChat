@@ -9,5 +9,4 @@ public interface AsyncResponse {
 
     void result(boolean output);
     //Gibbons <3 interfaces
-
 }

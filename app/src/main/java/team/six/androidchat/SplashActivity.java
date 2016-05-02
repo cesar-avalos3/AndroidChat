@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
         //Create Intent Object
         //First parameter is a Context - this object is a subclass of Activity which is a subclass of Context
         //Second parameter - Class to which the intent should be delivered (i.e. the activity that should be started)
-        Intent intent = new Intent(this, ChatActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
 
         // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
         startActivity(intent);
