@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,38 +72,15 @@ public class FragmentLogin extends Fragment{
     private void login() {
 
 
-        /*
-            //Do some sort of authetication then load an activity
-         */
-        Authentication my_validate = new Authentication();
+
+        Authentication my_validate = new Authentication(user,password);
 
         my_validate.execute(user.getText().toString(), password.getText().toString());
 
-        boolean validate = my_validate.getFinalVal();
-
-        if(validate) {
-
-            Context context = getActivity();
-            CharSequence text = "User Authenticated!";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
 
 
-        }
 
-        else {
-
-            Context context = getActivity();
-            CharSequence text = "Invalid User or Password!";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-
-        }
-
+    
     }
 
     private void createUser() {
