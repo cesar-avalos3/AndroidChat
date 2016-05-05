@@ -1,12 +1,16 @@
 package team.six.androidchat.Adding_User;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import team.six.androidchat.Adding_User.Add_Account_Async;
+import team.six.androidchat.MainActivity;
 import team.six.androidchat.R;
 
 public class Add_Account extends AppCompatActivity {
@@ -57,7 +61,33 @@ public class Add_Account extends AppCompatActivity {
         //Create an instance of the Sending Message Class
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
-        new Add_Account_Async().execute(userToAdd, passwordToAdd);
+
+        if(!(confirm.equals(passwordToAdd))) {
+            Context context = getApplicationContext();
+            CharSequence text = confirm;
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+
+        else {
+
+            Context context = getApplicationContext();
+            CharSequence text = "Password accepted!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+            new Add_Account_Async().execute(userToAdd, passwordToAdd);
+
+            Intent intent = new Intent(this, MainActivity.class);
+
+            // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
+            startActivity(intent);
+        }
+
     }
 
 

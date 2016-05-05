@@ -10,7 +10,6 @@
 package team.six.androidchat;
 
 //Deafult import for Bundle used in onCreate
-import android.accounts.AuthenticatorException;
 import android.os.Bundle;
 
 //Handler class so that we can auto refresh the session rooms messages page
@@ -22,7 +21,6 @@ import android.support.v7.app.AppCompatActivity;
 
 //Defaults imports for menus
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -31,7 +29,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.net.Authenticator;
+import team.six.androidchat.Validating_User.Authentication;
 
 
 /**
@@ -161,21 +159,7 @@ public class ChatActivity extends AppCompatActivity implements AsyncResponse{
                             getChatMessages();
                             handler.post(timedTask);
                         }
-                        else
-                        {
-                            try {
-                                //Async tasks are painful
-                                Authentication au = (Authentication) new Authentication(new AsyncResponse()
-                                {
-                                    @Override
-                                    public void result(boolean output) {
-                                    authbool = output;
-                                    }
-                                }).execute();
-                            }catch(Exception e)
-                            {
-                            }
-                        }
+
                     }
         });
     }

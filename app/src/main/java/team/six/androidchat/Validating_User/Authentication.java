@@ -1,4 +1,5 @@
-package team.six.androidchat;
+package team.six.androidchat.Validating_User;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,24 +11,30 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import team.six.androidchat.AsyncResponse;
+
 /**
  * Created by Cesar on 5/1/2016.
  */
 public class Authentication extends AsyncTask<String, Void, String>{
-    public AsyncResponse result = null;
-    boolean authBool;
 
-    public Authentication(AsyncResponse asyncResponse)
+
+    private boolean final_val;
+
+
+    public Authentication()
     {
-        this.result = asyncResponse;
+
     }
 
-    public static boolean authenticate()
+    public static boolean authenticate(String user, String pass)
     {
         try {
-            String password = "Vote for pedro";
-            String userName = "Pedro";
-            URL url = new URL("http://people.eecs.ku.edu/~cavalosb/AndroidChatProject4/login.php?name="+ URLEncoder.encode(userName, "utf-8")+"&password="+URLEncoder.encode(password, "utf-8"));
+
+           
+            String password = pass;
+            String userName = user;
+            URL url = new URL("http://people.eecs.ku.edu/~aknutsen/448_Project4/AndroidChatVerifyUser.php??username="+ URLEncoder.encode(userName, "utf-8")+"&password="+URLEncoder.encode(password, "utf-8"));
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             BufferedReader bf = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             String inputLine;
@@ -35,10 +42,9 @@ public class Authentication extends AsyncTask<String, Void, String>{
             while( (inputLine = bf.readLine()) != null) {
                 res.append(inputLine);
             }
-            Log.v("JSON:", res.toString());
-            JSONObject jsonObject = new JSONObject(res.toString());
+
             //Close the input
-            if(jsonObject.getInt("success") == 1) {
+            if(res.toString() == "true") {
                 Log.v("This is trooo", "Troooo I say");
                 return true;
             }
@@ -54,14 +60,14 @@ public class Authentication extends AsyncTask<String, Void, String>{
     }
 
     protected String doInBackground(String... arg0) {
-       if(authenticate())
-       {
-           return "true";
-       }
+        if(authenticate(arg0[0],arg0[1]))
+        {
+            return "true";
+        }
         else
-       {
-           return "false";
-       }
+        {
+            return "false";
+        }
     }
 
     @Override
@@ -76,13 +82,17 @@ public class Authentication extends AsyncTask<String, Void, String>{
         boolean temp;
         if(results == "true")
         {
-            temp = true;
+            final_val = true;
+
         }
         else
         {
-            temp = false;
+            final_val = false;
         }
-        Log.v("The results are: ", ""+results);
-        result.result(temp);
-        }
+
+    }
+
+    public boolean getFinalVal() {
+        return(final_val);
+    }
 }

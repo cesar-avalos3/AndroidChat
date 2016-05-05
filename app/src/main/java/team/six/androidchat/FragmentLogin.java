@@ -1,5 +1,6 @@
 package team.six.androidchat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import team.six.androidchat.Adding_User.Add_Account;
+import team.six.androidchat.Validating_User.Authentication;
 
 /**
  * Created by cesaravalos on 5/2/16.
@@ -71,24 +74,32 @@ public class FragmentLogin extends Fragment{
         /*
             //Do some sort of authetication then load an activity
          */
-        boolean success = true;
+        Authentication my_validate = new Authentication();
 
-        if(success) {
+        my_validate.execute(user.getText().toString(), password.getText().toString());
 
-            //Create Intent Object
-            //First parameter is a Context - this object is a subclass of Activity which is a subclass of Context
-            //Second parameter - Class to which the intent should be delivered (i.e. the activity that should be started)
-            Intent intent = new Intent(this.getActivity(), MainActivity.class);
+        boolean validate = my_validate.getFinalVal();
 
-            // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
-            startActivity(intent);
+        if(validate) {
+
+            Context context = getActivity();
+            CharSequence text = "User Authenticated!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
 
 
         }
 
         else {
 
+            Context context = getActivity();
+            CharSequence text = "Invalid User or Password!";
+            int duration = Toast.LENGTH_SHORT;
 
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
 
         }
 
