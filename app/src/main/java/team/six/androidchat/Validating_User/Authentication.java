@@ -1,4 +1,6 @@
 package team.six.androidchat.Validating_User;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.EditText;
@@ -8,6 +10,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import team.six.androidchat.Main2Activity;
 
 /**
  * Created by Cesar on 5/1/2016.
@@ -20,11 +24,14 @@ public class Authentication extends AsyncTask<String, Void, String>{
     private EditText user;
     private EditText password;
 
+    private Context context;
 
-    public Authentication(EditText u, EditText p)
+
+    public Authentication(EditText u, EditText p, Context c)
     {
         this.user = u;
         this.password = p;
+        this.context = c;
 
     }
 
@@ -88,7 +95,14 @@ public class Authentication extends AsyncTask<String, Void, String>{
         boolean temp;
         if(results.equals("true"))
         {
-            Log.d("onPostExecute:", "true");
+            //Create Intent Object
+            //First parameter is a Context - this object is a subclass of Activity which is a subclass of Context
+            //Second parameter - Class to which the intent should be delivered (i.e. the activity that should be started)
+            Intent intent = new Intent(context, Main2Activity.class);
+
+            // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
+            context.startActivity(intent);
+
             final_val = true;
 
         }

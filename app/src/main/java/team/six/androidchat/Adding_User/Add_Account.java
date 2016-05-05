@@ -85,6 +85,7 @@ public class Add_Account extends AppCompatActivity {
 
             // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
             startActivity(intent);
+            finish();
         }
 
     }

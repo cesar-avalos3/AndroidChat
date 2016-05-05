@@ -74,7 +74,7 @@ public class FragmentLogin extends Fragment{
 
 
 
-        Authentication my_validate = new Authentication(user,password);
+        Authentication my_validate = new Authentication(user,password,getContext());
 
         my_validate.execute(user.getText().toString(), password.getText().toString());
 

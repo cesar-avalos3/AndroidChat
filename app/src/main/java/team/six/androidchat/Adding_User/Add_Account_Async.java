@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 
 import android.util.Log;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -33,6 +35,14 @@ public class Add_Account_Async  extends AsyncTask<String, Void, String>  {
             url = new URL(urlLink);
             Log.d("Tag", urlLink);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            try
+            {
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+            }finally
+            {
+                urlConnection.disconnect();
+            }
+            System.out.println("here");
 
         } catch (Exception e) {
             Log.e("Error: ", e.getMessage());
