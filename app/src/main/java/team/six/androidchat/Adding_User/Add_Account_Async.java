@@ -1,26 +1,13 @@
 package team.six.androidchat.Adding_User;
 
-import android.content.Context;
+
 import android.os.AsyncTask;
-import android.text.Html;
+
 import android.util.Log;
-import android.widget.TextView;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpCookie;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
-import java.net.URLConnection;
+
 import java.net.URLEncoder;
 
 /**
@@ -28,10 +15,7 @@ import java.net.URLEncoder;
  */
 public class Add_Account_Async  extends AsyncTask<String, Void, String>  {
     URL url;
-    URLConnection con;
-    HttpClient client;
-    ACTION state;
-    HttpGet req;
+
 
 
     public enum ACTION {GET, POST};

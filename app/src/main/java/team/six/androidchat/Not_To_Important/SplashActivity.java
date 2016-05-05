@@ -8,13 +8,16 @@
 
 
 //Base package for all android packages
-package team.six.androidchat;
+package team.six.androidchat.Not_To_Important;
 
 //Import Intent so we can start ConnectActivity from this file
 import android.content.Intent;
 import android.os.Bundle;
 //Import Base Activity Class
 import android.support.v7.app.AppCompatActivity;
+
+import team.six.androidchat.MainActivity;
+import team.six.androidchat.Sending_Recieving.ConnectActivity;
 
 /**
  * <p>

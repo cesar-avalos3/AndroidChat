@@ -1,4 +1,4 @@
-package team.six.androidchat;
+package team.six.androidchat.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import team.six.androidchat.Adding_User.Add_Account;
+import team.six.androidchat.R;
 import team.six.androidchat.Validating_User.Authentication;
 
 /**
@@ -80,7 +81,7 @@ public class FragmentLogin extends Fragment{
 
 
 
-    
+
     }
 
     private void createUser() {

@@ -1,22 +1,13 @@
 package team.six.androidchat.Validating_User;
-import android.content.Context;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.logging.Handler;
-
-import team.six.androidchat.AsyncResponse;
-import team.six.androidchat.Message;
 
 /**
  * Created by Cesar on 5/1/2016.
@@ -122,6 +113,7 @@ public class Authentication extends AsyncTask<String, Void, String>{
 
         if(final_val) {
 
+            //Do Something here
             Log.d("here","Validated");
 
 
@@ -129,6 +121,7 @@ public class Authentication extends AsyncTask<String, Void, String>{
 
         else {
 
+            //Do something here
             Log.d("here","Not validated");
         }
 

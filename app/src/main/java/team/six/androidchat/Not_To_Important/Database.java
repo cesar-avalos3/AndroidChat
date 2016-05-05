@@ -1,4 +1,4 @@
-package team.six.androidchat;
+package team.six.androidchat.Not_To_Important;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

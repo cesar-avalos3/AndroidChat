@@ -1,10 +1,12 @@
-package team.six.androidchat;
+package team.six.androidchat.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import team.six.androidchat.R;
 
 /**
  * Created by cesaravalos on 5/2/16.

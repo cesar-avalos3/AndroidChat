@@ -9,7 +9,7 @@
 
 
 //Base package for all java files in the android app
-package team.six.androidchat;
+package team.six.androidchat.Not_To_Important;
 
 
 /**

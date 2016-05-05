@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+
+import team.six.androidchat.Fragments.FragmentLogin;
+import team.six.androidchat.Not_To_Important.ViewPagerAdapter;
 
 /**
  * Created by cesaravalos on 5/2/16.
@@ -18,8 +18,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private FragmentLogin login;
-    private FragmentSessions session;
-    private FragmentChat chat;
+
 
 
 
@@ -42,12 +41,10 @@ public class MainActivity extends AppCompatActivity
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         login = new FragmentLogin();
-        session = new FragmentSessions();
-        chat = new FragmentChat();
+
 
         viewPagerAdapter.addFragment(login, "LOGIN");
-        viewPagerAdapter.addFragment(session, "SESSIONS");
-        viewPagerAdapter.addFragment(chat, "CHAT");
+
 
         viewPager.setAdapter(viewPagerAdapter);
     }

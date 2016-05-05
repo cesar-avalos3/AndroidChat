@@ -7,7 +7,7 @@
  */
 
 //Deafult package which stores all java files
-package team.six.androidchat;
+package team.six.androidchat.Sending_Recieving;
 
 
 //The AsyncTask class allows us to work in the background without disrupting the apps User Interface
@@ -28,19 +28,13 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URI;
 
 //Used for reading input from a file
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLEncoder;
+
 
 
 /**

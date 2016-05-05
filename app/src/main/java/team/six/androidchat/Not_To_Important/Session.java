@@ -7,10 +7,12 @@
  */
 
 //Package that stores all java files for the android app
-package team.six.androidchat;
+package team.six.androidchat.Not_To_Important;
 
 //Import package for array lists
 import java.util.ArrayList;
+
+import team.six.androidchat.Not_To_Important.Message;
 
 /**
  * Class with one public method <code>addMessage</code> which adds a <code>Message</code> object to an arrayList.

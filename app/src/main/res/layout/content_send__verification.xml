@@ -7,14 +7,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Create User"
-        android:id="@+id/create" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connect"
-        android:id="@+id/button"
+        android:text="Verify"
+        android:id="@+id/send"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="300dp" />
 
@@ -24,7 +18,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/user"
         android:layout_gravity="center_horizontal"
-        android:text="User" />
+        android:text="Email" />
 
     <EditText
         android:layout_width="304dp"
@@ -34,6 +28,15 @@
         android:id="@+id/password"
         android:layout_gravity="center_horizontal"
         android:text="Password" />
+
+    <EditText
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/confirm_password"
+        android:layout_gravity="center_horizontal"
+        android:text="Confirm Password" />
 
 
 </LinearLayout>

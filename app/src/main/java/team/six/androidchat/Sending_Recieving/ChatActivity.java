@@ -7,7 +7,7 @@
  */
 
 //Default package which stores java files
-package team.six.androidchat;
+package team.six.androidchat.Sending_Recieving;
 
 //Deafult import for Bundle used in onCreate
 import android.os.Bundle;
@@ -29,7 +29,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import team.six.androidchat.Validating_User.Authentication;
+import team.six.androidchat.Not_To_Important.AsyncResponse;
+import team.six.androidchat.R;
 
 
 /**
@@ -40,7 +41,7 @@ import team.six.androidchat.Validating_User.Authentication;
  * @author Cesar Avalos, Alec Knutsen
  * @see AppCompatActivity
  */
-public class ChatActivity extends AppCompatActivity implements AsyncResponse{
+public class ChatActivity extends AppCompatActivity implements AsyncResponse {
 
     /**
      * Instane variable associated with displaying all messages in a specified session
