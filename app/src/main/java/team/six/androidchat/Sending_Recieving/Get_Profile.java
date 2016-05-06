@@ -20,6 +20,7 @@ import android.text.Html;
 import android.util.Log;
 
 //For modifying a text view
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -36,6 +37,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 
+import team.six.androidchat.Validating_User.Authentication;
+
 
 /**
  * <p>
@@ -50,14 +53,13 @@ import java.net.URLEncoder;
  * @author Cesar Avalos, Alec Knutsen
  * @see AsyncTask
  */
-public class ConnectActivity extends AsyncTask<String, Void, String> {
+public class Get_Profile extends AsyncTask<String, Void, String> {
 
     /**
      * Variable that will store an instance of the HttpClient Class
      */
     HttpClient client;
 
-    boolean dontdothisAuthentication = false;
 
     /**
      * Define a instance variable of Type Action (where ACTION is the enum above). Either get or post request
@@ -72,7 +74,7 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
     /**
      *Represens a Textview to be modified
      */
-    TextView chatText;
+    EditText chatText;
 
 
     /**
@@ -90,10 +92,9 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
      * @param chatText the TextView to be modified with all the messages from the chat
      * @param state the Action which the instance variable state will be set to (represents the HTTP request method, get or post)
      */
-    public ConnectActivity(TextView chatText, ACTION state)
+    public Get_Profile(EditText chatText)
     {
-        //Store the state to whatever was passed in as a parameter
-        this.state = state;
+
 
         //Store the chatText to whatever was passed in as a parameter
         this.chatText = chatText;
@@ -125,44 +126,44 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
      */
     protected String doInBackground(String... arg0)
     {
-        //If the action is a get HTTP request
-        if(state == ACTION.GET) {
-            try {
-                //Store the session number which is the first parameter passed in
-                String sessionNumber = arg0[0];
 
-                // A URI is a uniform resource identifier which allows us to access resources over the web
-                //This method sets the URI for the HttpGet Object (req)
-                req.setURI(new URI("http://people.eecs.ku.edu/~cavalosb/AndroidChat/AndroidChatReceive.php?session_number="+ URLEncoder.encode(sessionNumber, "utf-8")));
+        try {
+            //Store the session number which is the first parameter passed in
+            String user = arg0[0];
 
-                //Executes the HTTP Request (using the execute method, the HttpGet Object (req) and the DefaultHttpClient Object client)
-                HttpResponse res = client.execute(req);
+            Log.d("username: ", user);
+            // A URI is a uniform resource identifier which allows us to access resources over the web
+            //This method sets the URI for the HttpGet Object (req)
+            req.setURI(new URI("http://people.eecs.ku.edu/~aknutsen/448_Project4/Get_Profile.php?username="+ URLEncoder.encode(user, "utf-8")));
 
-                //Take the content from the Webpage as an input file to buffered reader
-                BufferedReader input = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
+            //Executes the HTTP Request (using the execute method, the HttpGet Object (req) and the DefaultHttpClient Object client)
+            HttpResponse res = client.execute(req);
 
-                //StringBuffer is like a string, but can be modified
-                StringBuffer stringB = new StringBuffer(" ");
+            //Take the content from the Webpage as an input file to buffered reader
+            BufferedReader input = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
 
-                //Read lines
-                String line = input.readLine();
-                while (line != null) {
-                    //Append new strings
-                    stringB.append(line);
-                    line = input.readLine();
-                }
-                //Close the input
-                input.close();
+            //StringBuffer is like a string, but can be modified
+            StringBuffer stringB = new StringBuffer(" ");
 
-                //Convert the buffered string to a string and return it
-                return stringB.toString();
+            //Read lines
+            String line = input.readLine();
+            while (line != null) {
+                //Append new strings
+                stringB.append(line);
+                line = input.readLine();
             }
+            //Close the input
+            input.close();
 
-            //Catch any errors
-            catch (Exception e) {
-                Log.e("Not able to connect: ", e.getMessage());
-            }
+            //Convert the buffered string to a string and return it
+            return stringB.toString();
         }
+
+        //Catch any errors
+        catch (Exception e) {
+            Log.e("Not able to connect: ", e.getMessage());
+        }
+
 
         //Return empty string as default
         return "";

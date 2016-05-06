@@ -1,4 +1,5 @@
 package team.six.androidchat.Validating_User;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -23,6 +24,8 @@ public class Authentication extends AsyncTask<String, Void, String>{
 
     private EditText user;
     private EditText password;
+
+    private static String username = "";
 
     private Context context;
 
@@ -95,6 +98,8 @@ public class Authentication extends AsyncTask<String, Void, String>{
         boolean temp;
         if(results.equals("true"))
         {
+            username = user.getText().toString();
+
             //Create Intent Object
             //First parameter is a Context - this object is a subclass of Activity which is a subclass of Context
             //Second parameter - Class to which the intent should be delivered (i.e. the activity that should be started)
@@ -102,6 +107,7 @@ public class Authentication extends AsyncTask<String, Void, String>{
 
             // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
             context.startActivity(intent);
+
 
             final_val = true;
 
@@ -139,6 +145,17 @@ public class Authentication extends AsyncTask<String, Void, String>{
             Log.d("here","Not validated");
         }
 
+    }
+
+    public static void setUsername(String u) {
+
+        username = u;
+
+    }
+
+    public static String getUsername() {
+
+        return(username);
     }
 
 

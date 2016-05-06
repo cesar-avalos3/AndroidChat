@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Sending_Recieving.ChatActivity"
-    tools:showIn="@layout/activity_chat">
+    android:orientation="vertical"
+    >
+
 
     <TextView
-        android:layout_width="220dp"
-        android:layout_height="300dp"
-        android:text=""
-        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:id="@+id/sesMess"
         android:scrollbars = "vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop = "true"
 
-    <EditText
-        android:id="@+id/inputText"
-        android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:inputType="text"
-        android:layout_below="@+id/input2Text"
-        android:layout_alignParentEnd="true" />
-    <EditText
-        android:id="@+id/input2Text"
-        android:layout_width="fill_parent"
-        android:layout_height="70dp"
-        android:inputType="text"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        />
 
-    <EditText
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:id="@+id/sessionNumberInput"
-        android:inputType="number"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/inputText"
-        android:layout_marginBottom="77dp" />
-</RelativeLayout>
+        >
+
+        <EditText
+            android:layout_width="229dp"
+            android:layout_height="match_parent"
+            android:id="@+id/messageInput"
+            android:text="Message" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/sendMess"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@android:drawable/ic_dialog_email" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/refresh"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:src="@android:drawable/ic_menu_rotate"  />
+    </LinearLayout>
+
+
+
+</LinearLayout>
+

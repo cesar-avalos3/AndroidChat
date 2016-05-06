@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import team.six.androidchat.Fragments.FragmentChat;
 import team.six.androidchat.Fragments.FragmentLogin;
 import team.six.androidchat.Fragments.FragmentSessions;
+import team.six.androidchat.Fragments.UserProfile;
 import team.six.androidchat.Not_To_Important.ViewPagerAdapter;
 
 /**
@@ -19,7 +20,7 @@ public class Main2Activity extends AppCompatActivity
     private ViewPager viewPager;
 
 
-    private FragmentLogin login;
+    private UserProfile profile;
     private FragmentChat chat;
     private FragmentSessions session;
 
@@ -44,14 +45,15 @@ public class Main2Activity extends AppCompatActivity
     {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        login = new FragmentLogin();
+        profile = new UserProfile();
         chat  = new FragmentChat();
         session = new FragmentSessions();
 
 
-        viewPagerAdapter.addFragment(login, "LOGIN");
-        viewPagerAdapter.addFragment(chat, "SESSION");
-        viewPagerAdapter.addFragment(session, "CHAT");
+        viewPagerAdapter.addFragment(profile, "Profile");
+        viewPagerAdapter.addFragment(session, "Sessions");
+        viewPagerAdapter.addFragment(chat, "Chat");
+
 
 
         viewPager.setAdapter(viewPagerAdapter);

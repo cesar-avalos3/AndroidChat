@@ -11,6 +11,7 @@ package team.six.androidchat.Sending_Recieving;
 
 
 //The AsyncTask class allows us to work in the background without disrupting the apps User Interface
+import android.content.Context;
 import android.os.AsyncTask;
 
 //Used to display HTML in a textview
@@ -20,6 +21,9 @@ import android.text.Html;
 import android.util.Log;
 
 //For modifying a text view
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -35,6 +39,9 @@ import java.net.URI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import team.six.androidchat.Validating_User.Authentication;
 
 
 /**
@@ -50,14 +57,13 @@ import java.net.URLEncoder;
  * @author Cesar Avalos, Alec Knutsen
  * @see AsyncTask
  */
-public class ConnectActivity extends AsyncTask<String, Void, String> {
+public class Get_Sessions extends AsyncTask<String, Void, String> {
 
     /**
      * Variable that will store an instance of the HttpClient Class
      */
     HttpClient client;
 
-    boolean dontdothisAuthentication = false;
 
     /**
      * Define a instance variable of Type Action (where ACTION is the enum above). Either get or post request
@@ -72,7 +78,12 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
     /**
      *Represens a Textview to be modified
      */
-    TextView chatText;
+    Spinner sessions;
+
+    Context context;
+
+
+    ArrayList<String> items = new ArrayList<>();
 
 
     /**
@@ -90,13 +101,13 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
      * @param chatText the TextView to be modified with all the messages from the chat
      * @param state the Action which the instance variable state will be set to (represents the HTTP request method, get or post)
      */
-    public ConnectActivity(TextView chatText, ACTION state)
+    public Get_Sessions(Spinner s, Context c)
     {
-        //Store the state to whatever was passed in as a parameter
-        this.state = state;
 
+
+        this.context = c;
         //Store the chatText to whatever was passed in as a parameter
-        this.chatText = chatText;
+        this.sessions = s;
 
         //Create an instace of the DefaulthttpClient class
         this.client = new DefaultHttpClient();
@@ -113,8 +124,11 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
      */
     protected void onPostExecute(String results)
     {
-        //Set the text of the chat text to the results passed in as a parameter in the form of an html page
-        this.chatText.setText(Html.fromHtml(results));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        sessions.setAdapter(adapter);
     }
 
     /**
@@ -125,44 +139,54 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
      */
     protected String doInBackground(String... arg0)
     {
-        //If the action is a get HTTP request
-        if(state == ACTION.GET) {
-            try {
-                //Store the session number which is the first parameter passed in
-                String sessionNumber = arg0[0];
 
-                // A URI is a uniform resource identifier which allows us to access resources over the web
-                //This method sets the URI for the HttpGet Object (req)
-                req.setURI(new URI("http://people.eecs.ku.edu/~cavalosb/AndroidChat/AndroidChatReceive.php?session_number="+ URLEncoder.encode(sessionNumber, "utf-8")));
 
-                //Executes the HTTP Request (using the execute method, the HttpGet Object (req) and the DefaultHttpClient Object client)
-                HttpResponse res = client.execute(req);
+        try {
 
-                //Take the content from the Webpage as an input file to buffered reader
-                BufferedReader input = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
+            //Store the session number which is the first parameter passed in
+            String user = arg0[0];
 
-                //StringBuffer is like a string, but can be modified
-                StringBuffer stringB = new StringBuffer(" ");
+            Log.d("username",user);
 
-                //Read lines
-                String line = input.readLine();
-                while (line != null) {
-                    //Append new strings
-                    stringB.append(line);
-                    line = input.readLine();
-                }
-                //Close the input
-                input.close();
+            // A URI is a uniform resource identifier which allows us to access resources over the web
+            //This method sets the URI for the HttpGet Object (req)
+            req.setURI(new URI("http://people.eecs.ku.edu/~aknutsen/448_Project4/Get_Sessions.php?username="+ URLEncoder.encode(user, "utf-8")));
 
-                //Convert the buffered string to a string and return it
-                return stringB.toString();
+            //Executes the HTTP Request (using the execute method, the HttpGet Object (req) and the DefaultHttpClient Object client)
+            HttpResponse res = client.execute(req);
+
+            //Take the content from the Webpage as an input file to buffered reader
+            BufferedReader input = new BufferedReader(new InputStreamReader(res.getEntity().getContent()));
+
+            //StringBuffer is like a string, but can be modified
+            StringBuffer stringB = new StringBuffer(" ");
+
+            //Read lines
+            String line = input.readLine();
+
+            Log.d("line", line);
+
+            while (line != null)  {
+                items.add(Html.fromHtml(line).toString());
+                line = input.readLine();
+
+
+
             }
+            Log.d("Herefsklkjlsdfkjldfskjl","Here");
+            //Close the input
+            input.close();
 
-            //Catch any errors
-            catch (Exception e) {
-                Log.e("Not able to connect: ", e.getMessage());
-            }
+            //Convert the buffered string to a string and return it
+
+            return stringB.toString();
         }
+
+        //Catch any errors
+        catch (Exception e) {
+            Log.e("Not able to connect: ", e.getMessage());
+        }
+
 
         //Return empty string as default
         return "";
