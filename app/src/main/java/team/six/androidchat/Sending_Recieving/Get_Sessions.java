@@ -164,15 +164,23 @@ public class Get_Sessions extends AsyncTask<String, Void, String> {
             //Read lines
             String line = input.readLine();
 
-            Log.d("line", line);
+            String my_string = "";
+            for(int i =0; i < line.length(); i++) {
 
-            while (line != null)  {
-                items.add(Html.fromHtml(line).toString());
-                line = input.readLine();
+                if(line.substring(i,i+1).equals("!")) {
+                    Log.d("MY STRING:", my_string);
+                    items.add(Html.fromHtml(my_string).toString());
+                    my_string = "";
+                }
 
+                else {
 
+                    my_string = my_string + line.substring(i,i+1);
 
+                }
             }
+
+
             Log.d("Herefsklkjlsdfkjldfskjl","Here");
             //Close the input
             input.close();

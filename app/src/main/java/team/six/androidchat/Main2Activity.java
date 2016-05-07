@@ -51,8 +51,8 @@ public class Main2Activity extends AppCompatActivity
 
 
         viewPagerAdapter.addFragment(profile, "Profile");
-        viewPagerAdapter.addFragment(session, "Sessions");
-        viewPagerAdapter.addFragment(chat, "Chat");
+        viewPagerAdapter.addFragment(session, "ChatRooms");
+        viewPagerAdapter.addFragment(chat, "ChatLog");
 
 
 

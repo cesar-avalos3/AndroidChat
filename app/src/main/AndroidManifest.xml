@@ -33,7 +33,9 @@
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".Spinners.SpinnerActivity"></activity>
+        <activity android:name=".Spinners.SpinnerActivity" />
+        <activity android:name=".Create_New_Chatroom.CreateRoom" />
+        <activity android:name=".Create_New_Chatroom.Add_Friends"></activity>
     </application>
 
 </manifest>

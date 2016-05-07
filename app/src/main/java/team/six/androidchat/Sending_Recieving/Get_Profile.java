@@ -115,7 +115,7 @@ public class Get_Profile extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String results)
     {
         //Set the text of the chat text to the results passed in as a parameter in the form of an html page
-        this.chatText.setText(Html.fromHtml(results));
+        this.chatText.setText("Username: " + Html.fromHtml(Authentication.getUsername()));
     }
 
     /**

@@ -11,4 +11,18 @@
         android:layout_height="wrap_content"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown" />
+
+    <Button
+        android:id="@+id/create_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Create Room"
+        android:layout_gravity="center" />
+
+    <Button
+        android:id="@+id/add_to_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text = "Add Friend to Existing Room"
+        android:layout_gravity="center_horizontal|bottom" />
 </FrameLayout>
