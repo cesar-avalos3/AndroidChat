@@ -74,7 +74,7 @@ public class Get_Profile extends AsyncTask<String, Void, String> {
     /**
      *Represens a Textview to be modified
      */
-    EditText chatText;
+    TextView chatText;
 
 
     /**
@@ -92,7 +92,7 @@ public class Get_Profile extends AsyncTask<String, Void, String> {
      * @param chatText the TextView to be modified with all the messages from the chat
      * @param state the Action which the instance variable state will be set to (represents the HTTP request method, get or post)
      */
-    public Get_Profile(EditText chatText)
+    public Get_Profile(TextView chatText)
     {
 
 
@@ -115,7 +115,7 @@ public class Get_Profile extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String results)
     {
         //Set the text of the chat text to the results passed in as a parameter in the form of an html page
-        this.chatText.setText("Username: " + Html.fromHtml(Authentication.getUsername()));
+        this.chatText.setText("Username: " + Html.fromHtml(results));
     }
 
     /**

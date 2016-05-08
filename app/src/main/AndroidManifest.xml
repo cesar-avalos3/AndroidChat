@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
@@ -33,9 +34,13 @@
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".Spinners.SpinnerActivity" />
         <activity android:name=".Create_New_Chatroom.CreateRoom" />
-        <activity android:name=".Create_New_Chatroom.Add_Friends"></activity>
+        <activity android:name=".Create_New_Chatroom.Add_Friends" />
+        <activity
+            android:name=".Adding_User.EditPassword"
+            android:label="@string/title_activity_edit_password"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".Adding_User.Edit_Username"></activity>
     </application>
 
 </manifest>

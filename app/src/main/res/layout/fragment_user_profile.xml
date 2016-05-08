@@ -5,10 +5,27 @@
     tools:context="team.six.androidchat.Fragments.UserProfile">
 
     <!-- TODO: Update blank fragment layout -->
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_edit_pass"
+        android:text="Edit Password"
+        android:layout_gravity="right|bottom" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_user"
+        android:text="Edit Username"
+        android:layout_gravity="left|bottom" />
+
+    <TextView
+        android:layout_width="342dp"
+        android:layout_height="406dp"
         android:id="@+id/sessions"
-        android:text="@string/hello_blank_fragment" />
+        android:textSize="70sp"
+        android:text="@string/hello_blank_fragment"
+        android:layout_gravity="center" />
 
 </FrameLayout>

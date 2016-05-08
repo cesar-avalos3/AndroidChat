@@ -9,14 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import team.six.androidchat.Main2Activity;
 import team.six.androidchat.MainActivity;
 import team.six.androidchat.R;
 
-public class Add_Account extends AppCompatActivity {
+public class EditPassword extends AppCompatActivity {
 
     private EditText user;
-    private EditText password;
-    private EditText confirm_password;
+    private EditText old_password;
+    private EditText new_password;
+    private EditText confirm_new_password;
     private Button send;
 
 
@@ -24,16 +26,13 @@ public class Add_Account extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_send__verification);
+        setContentView(R.layout.content_edit_password);
 
-        user = (EditText) findViewById(R.id.user);
-        password = (EditText) findViewById(R.id.password);
-        confirm_password = (EditText) findViewById(R.id.confirm_password);
-        send = (Button) findViewById(R.id.send);
-
-        user.setText("Email");
-        password.setText("Password");
-        confirm_password.setText("Confirm Password");
+        user = (EditText) findViewById(R.id.username);
+        old_password = (EditText) findViewById(R.id.old_password);
+        new_password = (EditText) findViewById(R.id.new_password);
+        confirm_new_password = (EditText) findViewById(R.id.confirm_new_password);
+        send = (Button) findViewById(R.id.new_edit_pass);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +40,7 @@ public class Add_Account extends AppCompatActivity {
             //Call the sendMessages when the email red button is clicked
             public void onClick(View view) {
 
-                sendUser();
+                updatePassword();
 
             }
         });
@@ -49,30 +48,32 @@ public class Add_Account extends AppCompatActivity {
 
     }
 
-    public void sendUser()
+    public void updatePassword()
     {
         //Get the message context from the inpuTextstring textbox
-        String userToAdd = user.getText().toString();
+        String userToEdit = user.getText().toString();
         //Get the author from the authorText textbox
-        String passwordToAdd = password.getText().toString();
+        String passwordToEdit = old_password.getText().toString();
 
-        String confirm = confirm_password.getText().toString();
+        String new_pass = new_password.getText().toString();
+        String confirm_new = confirm_new_password.getText().toString();
         //Create an instance of the Sending Message Class
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
 
-        if(!(confirm.equals(passwordToAdd))) {
+        if(!(new_pass.equals(confirm_new))) {
             Context context = getApplicationContext();
-            CharSequence text = confirm;
+            CharSequence text = "New Passwords do not match!";
             int duration = Toast.LENGTH_SHORT;
 
-            Toast toast = Toast.makeText(context, "Passwords do not match", duration);
+            Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
 
         else {
 
-            new Add_Account_Async(this).execute(userToAdd, passwordToAdd);
+
+            new Async_Edit_Password(getApplicationContext()).execute(userToEdit, new_pass, passwordToEdit);
 
 
         }

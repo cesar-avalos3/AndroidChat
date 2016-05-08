@@ -56,19 +56,10 @@ public class Add_Friends extends AppCompatActivity {
 
 
         Context context = getApplicationContext();
-        CharSequence text = "User Added to Room!";
-        int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
 
-        new Async_Add_Friends().execute(room,user_to_add);
+        new Async_Add_Friends(context).execute(room,user_to_add);
 
-        Intent intent = new Intent(this, Main2Activity.class);
-
-        // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
-        startActivity(intent);
-        finish();
 
 
     }

@@ -52,19 +52,10 @@ public class CreateRoom extends AppCompatActivity {
 
 
         Context context = getApplicationContext();
-        CharSequence text = "Room Created!";
-        int duration = Toast.LENGTH_SHORT;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        new Async_Create_Room(context).execute(roomToAdd);
 
-        new Async_Create_Room().execute(roomToAdd);
 
-        Intent intent = new Intent(this, Main2Activity.class);
-
-        // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
-        startActivity(intent);
-        finish();
 
 
     }

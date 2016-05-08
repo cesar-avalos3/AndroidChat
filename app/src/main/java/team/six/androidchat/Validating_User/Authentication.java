@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -35,6 +36,11 @@ public class Authentication extends AsyncTask<String, Void, String>{
         this.user = u;
         this.password = p;
         this.context = c;
+
+    }
+
+    public Authentication()
+    {
 
     }
 
@@ -108,12 +114,21 @@ public class Authentication extends AsyncTask<String, Void, String>{
             // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
             context.startActivity(intent);
 
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, "WELCOME " + username + "!", duration);
+            toast.show();
+
 
             final_val = true;
 
         }
         else
         {
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, "Invalid Username or Password!", duration);
+            toast.show();
             Log.d("onPostExecute:", "false");
             final_val = false;
         }
