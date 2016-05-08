@@ -21,7 +21,7 @@ import java.net.URLEncoder;
 /**
  * Created by Yarden on 4/5/2016.
  */
-public class SendingMessage  extends AsyncTask<String, Void, String>  {
+public class Async_Send_Messages extends AsyncTask<String, Void, String>  {
     URL url;
     URLConnection con;
     HttpClient client;
@@ -59,7 +59,7 @@ public class SendingMessage  extends AsyncTask<String, Void, String>  {
         return "bnelh";
     }
 
-    public SendingMessage()
+    public Async_Send_Messages()
     {
         //Default make GET the state
         this.state = state;

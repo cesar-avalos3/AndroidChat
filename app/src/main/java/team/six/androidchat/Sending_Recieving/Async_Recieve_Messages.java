@@ -2,7 +2,7 @@
  *
  * @author Cesar Avalos, Alec Knutsen
  * @date  4/3/2016
- * @filename ConnectActivity.java
+ * @filename Async_Recieve_Messages.java
  *
  */
 
@@ -50,7 +50,7 @@ import java.net.URLEncoder;
  * @author Cesar Avalos, Alec Knutsen
  * @see AsyncTask
  */
-public class ConnectActivity extends AsyncTask<String, Void, String> {
+public class Async_Recieve_Messages extends AsyncTask<String, Void, String> {
 
     /**
      * Variable that will store an instance of the HttpClient Class
@@ -90,7 +90,7 @@ public class ConnectActivity extends AsyncTask<String, Void, String> {
      * @param chatText the TextView to be modified with all the messages from the chat
      * @param state the Action which the instance variable state will be set to (represents the HTTP request method, get or post)
      */
-    public ConnectActivity(TextView chatText, ACTION state)
+    public Async_Recieve_Messages(TextView chatText, ACTION state)
     {
         //Store the state to whatever was passed in as a parameter
         this.state = state;

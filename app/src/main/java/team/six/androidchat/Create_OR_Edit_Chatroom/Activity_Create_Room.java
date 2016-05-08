@@ -1,20 +1,16 @@
-package team.six.androidchat.Create_New_Chatroom;
+package team.six.androidchat.Create_OR_Edit_Chatroom;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import team.six.androidchat.Adding_User.Async_Create_Room;
-import team.six.androidchat.Main2Activity;
-import team.six.androidchat.MainActivity;
+import team.six.androidchat.Add_OR_Edit_User.Async_Create_Room;
 import team.six.androidchat.R;
 
-public class CreateRoom extends AppCompatActivity {
+public class Activity_Create_Room extends AppCompatActivity {
 
     private EditText room_name;
     private Button create;

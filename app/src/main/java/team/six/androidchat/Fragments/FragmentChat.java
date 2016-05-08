@@ -7,17 +7,15 @@ import android.support.v4.app.Fragment;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import team.six.androidchat.R;
-import team.six.androidchat.Sending_Recieving.ConnectActivity;
-import team.six.androidchat.Sending_Recieving.SendingMessage;
-import team.six.androidchat.Validating_User.Authentication;
+import team.six.androidchat.Sending_Recieving.Async_Recieve_Messages;
+import team.six.androidchat.Sending_Recieving.Async_Send_Messages;
+import team.six.androidchat.Validating_User.Async_Authenticate_User;
 
 /**
  * Created by cesaravalos on 5/2/16.
@@ -46,7 +44,7 @@ public class FragmentChat extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance)
     {
 
-        View view = inflater.inflate(R.layout.content_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
         session_messages = (TextView) view.findViewById(R.id.sesMess);
 
@@ -123,15 +121,15 @@ public class FragmentChat extends Fragment
 
 
     /**
-     * Gets the current session number and uses the <code>ConnectActivity</code> class to display messages for the session
+     * Gets the current session number and uses the <code>Async_Recieve_Messages</code> class to display messages for the session
      */
     public void getChatMessages()
     {
         //Gets the current session number for the input box
-        //Create an instance of the ConnectActivity  Class
+        //Create an instance of the Async_Recieve_Messages  Class
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
-        new ConnectActivity(session_messages, ConnectActivity.ACTION.GET).execute(currentSessionNumber);
+        new Async_Recieve_Messages(session_messages, Async_Recieve_Messages.ACTION.GET).execute(currentSessionNumber);
     }
 
     /**
@@ -142,12 +140,12 @@ public class FragmentChat extends Fragment
         //Get the message context from the inpuTextstring textbox
         String stringToAdd = user_message.getText().toString();
         //Get the author from the authorText textbox
-        String authorToAdd = Authentication.getUsername();
+        String authorToAdd = Async_Authenticate_User.getUsername();
 
         //Create an instance of the Sending Message Class
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
-        new SendingMessage().execute(currentSessionNumber,stringToAdd,authorToAdd);
+        new Async_Send_Messages().execute(currentSessionNumber,stringToAdd,authorToAdd);
     }
 
 

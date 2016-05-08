@@ -1,24 +1,19 @@
 package team.six.androidchat.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import team.six.androidchat.Adding_User.EditPassword;
-import team.six.androidchat.Adding_User.Edit_Username;
-import team.six.androidchat.Main2Activity;
+import team.six.androidchat.Add_OR_Edit_User.Activity_Edit_Password;
+import team.six.androidchat.Add_OR_Edit_User.Activity_Edit_Username;
 import team.six.androidchat.R;
-import team.six.androidchat.Sending_Recieving.Get_Profile;
-import team.six.androidchat.Validating_User.Authentication;
+import team.six.androidchat.Sending_Recieving.Async_Get_User_Profile;
+import team.six.androidchat.Validating_User.Async_Authenticate_User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +22,7 @@ import team.six.androidchat.Validating_User.Authentication;
  * to handle interaction events.
  * create an instance of this fragment.
  */
-public class UserProfile extends Fragment {
+public class FragmentUserProfile extends Fragment {
 
 
     private TextView sessions;
@@ -48,7 +43,7 @@ public class UserProfile extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_userprofile, container, false);
         // Inflate the layout for this fragment
 
         sessions = (TextView) view.findViewById(R.id.sessions);
@@ -63,7 +58,7 @@ public class UserProfile extends Fragment {
             //Call the sendMessages when the email red button is clicked
             public void onClick(View view) {
 
-                Intent intent = new Intent(view.getContext(), EditPassword.class);
+                Intent intent = new Intent(view.getContext(), Activity_Edit_Password.class);
 
                 // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
                 view.getContext().startActivity(intent);
@@ -77,7 +72,7 @@ public class UserProfile extends Fragment {
             //Call the sendMessages when the email red button is clicked
             public void onClick(View view) {
 
-                Intent intent = new Intent(view.getContext(),Edit_Username.class);
+                Intent intent = new Intent(view.getContext(),Activity_Edit_Username.class);
 
                 // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
                 view.getContext().startActivity(intent);
@@ -85,9 +80,9 @@ public class UserProfile extends Fragment {
             }
         });
 
-        Get_Profile my_task = new Get_Profile(sessions);
+        Async_Get_User_Profile my_task = new Async_Get_User_Profile(sessions);
         ;
-        my_task.execute(Authentication.getUsername());
+        my_task.execute(Async_Authenticate_User.getUsername());
         return view;
     }
 }

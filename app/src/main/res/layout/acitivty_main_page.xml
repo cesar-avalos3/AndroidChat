@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark">
     android:fitsSystemWindows="true"
-    tools:context="team.six.androidchat.Send_Verification">
+    tools:context="team.six.androidchat.Activity_Main_Page">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_send__verification" />
+    <include layout="@layout/activity_main_page" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

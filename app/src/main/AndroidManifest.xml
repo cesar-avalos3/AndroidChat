@@ -14,7 +14,8 @@
         <activity
             android:name=".Not_To_Important.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,24 +24,30 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity_Login_Page"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustNothing" />
+            android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".Adding_User.Add_Account"
+            android:name=".Add_OR_Edit_User.Activity_Add_Account"
             android:label="@string/title_activity_send__verification"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".Main2Activity"
+            android:name=".Activity_Main_Page"
             android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".Create_New_Chatroom.CreateRoom" />
-        <activity android:name=".Create_New_Chatroom.Add_Friends" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Create_OR_Edit_Chatroom.Activity_Create_Room"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Create_OR_Edit_Chatroom.Activity_Add_Friends"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".Adding_User.EditPassword"
+            android:name=".Add_OR_Edit_User.Activity_Edit_Password"
             android:label="@string/title_activity_edit_password"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".Adding_User.Edit_Username"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Add_OR_Edit_User.Activity_Edit_Username"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

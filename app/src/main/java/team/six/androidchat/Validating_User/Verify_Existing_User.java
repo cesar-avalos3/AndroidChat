@@ -1,19 +1,11 @@
 package team.six.androidchat.Validating_User;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import team.six.androidchat.Main2Activity;
 
 /**
  * Created by Cesar on 5/1/2016.

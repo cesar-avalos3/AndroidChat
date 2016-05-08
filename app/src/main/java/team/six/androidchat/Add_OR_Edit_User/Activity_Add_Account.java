@@ -1,7 +1,6 @@
-package team.six.androidchat.Adding_User;
+package team.six.androidchat.Add_OR_Edit_User;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,10 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import team.six.androidchat.MainActivity;
 import team.six.androidchat.R;
 
-public class Add_Account extends AppCompatActivity {
+public class Activity_Add_Account extends AppCompatActivity {
 
     private EditText user;
     private EditText password;
@@ -24,16 +22,13 @@ public class Add_Account extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_send__verification);
+        setContentView(R.layout.activity_add_account);
 
         user = (EditText) findViewById(R.id.user);
         password = (EditText) findViewById(R.id.password);
         confirm_password = (EditText) findViewById(R.id.confirm_password);
         send = (Button) findViewById(R.id.send);
 
-        user.setText("Email");
-        password.setText("Password");
-        confirm_password.setText("Confirm Password");
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +67,7 @@ public class Add_Account extends AppCompatActivity {
 
         else {
 
-            new Add_Account_Async(this).execute(userToAdd, passwordToAdd);
+            new Async_Add_Account(this).execute(userToAdd, passwordToAdd);
 
 
         }

@@ -1,4 +1,4 @@
-package team.six.androidchat.Adding_User;
+package team.six.androidchat.Add_OR_Edit_User;
 
 
 import android.content.Context;
@@ -15,9 +15,9 @@ import java.net.URL;
 
 import java.net.URLEncoder;
 
-import team.six.androidchat.Create_New_Chatroom.Verify_Existing_Chatroom;
-import team.six.androidchat.Main2Activity;
-import team.six.androidchat.Validating_User.Authentication;
+import team.six.androidchat.Activity_Main_Page;
+import team.six.androidchat.Create_OR_Edit_Chatroom.Verify_Existing_Chatroom;
+import team.six.androidchat.Validating_User.Async_Authenticate_User;
 
 /**
  * Created by Yarden on 4/5/2016.
@@ -49,7 +49,7 @@ public class Async_Create_Room  extends AsyncTask<String, Void, String>  {
             Toast toast = Toast.makeText(context, "Room Created!", duration);
             toast.show();
 
-            Intent intent = new Intent(context, Main2Activity.class);
+            Intent intent = new Intent(context, Activity_Main_Page.class);
 
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -66,7 +66,7 @@ public class Async_Create_Room  extends AsyncTask<String, Void, String>  {
     protected String doInBackground(String... arg0)
     {
         String roomname = arg0[0];
-        String author = Authentication.getUsername();
+        String author = Async_Authenticate_User.getUsername();
 
         try {
             Verify_Existing_Chatroom verify = new Verify_Existing_Chatroom();

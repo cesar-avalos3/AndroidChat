@@ -1,4 +1,4 @@
-package team.six.androidchat.Adding_User;
+package team.six.androidchat.Add_OR_Edit_User;
 
 
 import android.content.Context;
@@ -15,19 +15,19 @@ import java.net.URL;
 
 import java.net.URLEncoder;
 
-import team.six.androidchat.Main2Activity;
-import team.six.androidchat.MainActivity;
+import team.six.androidchat.Activity_Login_Page;
+import team.six.androidchat.Activity_Main_Page;
 import team.six.androidchat.Validating_User.Verify_Existing_User;
 
 /**
  * Created by Yarden on 4/5/2016.
  */
-public class Add_Account_Async  extends AsyncTask<String, Void, String>  {
+public class Async_Add_Account extends AsyncTask<String, Void, String>  {
     URL url;
 
     private Context context;
 
-    public Add_Account_Async(Context c) {
+    public Async_Add_Account(Context c) {
         this.context = c;
     }
 
@@ -49,7 +49,7 @@ public class Add_Account_Async  extends AsyncTask<String, Void, String>  {
             Toast toast = Toast.makeText(context, "User created!", duration);
             toast.show();
 
-            Intent intent = new Intent(context, Main2Activity.class);
+            Intent intent = new Intent(context, Activity_Login_Page.class);
 
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

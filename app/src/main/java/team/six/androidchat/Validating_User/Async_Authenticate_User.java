@@ -1,5 +1,4 @@
 package team.six.androidchat.Validating_User;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,12 +12,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import team.six.androidchat.Main2Activity;
+import team.six.androidchat.Activity_Main_Page;
 
 /**
  * Created by Cesar on 5/1/2016.
  */
-public class Authentication extends AsyncTask<String, Void, String>{
+public class Async_Authenticate_User extends AsyncTask<String, Void, String>{
 
 
     public boolean final_val;
@@ -31,7 +30,7 @@ public class Authentication extends AsyncTask<String, Void, String>{
     private Context context;
 
 
-    public Authentication(EditText u, EditText p, Context c)
+    public Async_Authenticate_User(EditText u, EditText p, Context c)
     {
         this.user = u;
         this.password = p;
@@ -39,7 +38,7 @@ public class Authentication extends AsyncTask<String, Void, String>{
 
     }
 
-    public Authentication()
+    public Async_Authenticate_User()
     {
 
     }
@@ -109,7 +108,7 @@ public class Authentication extends AsyncTask<String, Void, String>{
             //Create Intent Object
             //First parameter is a Context - this object is a subclass of Activity which is a subclass of Context
             //Second parameter - Class to which the intent should be delivered (i.e. the activity that should be started)
-            Intent intent = new Intent(context, Main2Activity.class);
+            Intent intent = new Intent(context, Activity_Main_Page.class);
 
             // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
             context.startActivity(intent);

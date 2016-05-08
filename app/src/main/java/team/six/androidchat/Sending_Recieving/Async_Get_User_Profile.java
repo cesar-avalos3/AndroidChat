@@ -2,7 +2,7 @@
  *
  * @author Cesar Avalos, Alec Knutsen
  * @date  4/3/2016
- * @filename ConnectActivity.java
+ * @filename Async_Recieve_Messages.java
  *
  */
 
@@ -11,7 +11,6 @@ package team.six.androidchat.Sending_Recieving;
 
 
 //The AsyncTask class allows us to work in the background without disrupting the apps User Interface
-import android.content.Context;
 import android.os.AsyncTask;
 
 //Used to display HTML in a textview
@@ -21,9 +20,6 @@ import android.text.Html;
 import android.util.Log;
 
 //For modifying a text view
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 
@@ -39,9 +35,6 @@ import java.net.URI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-
-import team.six.androidchat.Validating_User.Authentication;
 
 
 /**
@@ -57,7 +50,7 @@ import team.six.androidchat.Validating_User.Authentication;
  * @author Cesar Avalos, Alec Knutsen
  * @see AsyncTask
  */
-public class Get_Sessions extends AsyncTask<String, Void, String> {
+public class Async_Get_User_Profile extends AsyncTask<String, Void, String> {
 
     /**
      * Variable that will store an instance of the HttpClient Class
@@ -78,12 +71,7 @@ public class Get_Sessions extends AsyncTask<String, Void, String> {
     /**
      *Represens a Textview to be modified
      */
-    Spinner sessions;
-
-    Context context;
-
-
-    ArrayList<String> items = new ArrayList<>();
+    TextView chatText;
 
 
     /**
@@ -101,13 +89,12 @@ public class Get_Sessions extends AsyncTask<String, Void, String> {
      * @param chatText the TextView to be modified with all the messages from the chat
      * @param state the Action which the instance variable state will be set to (represents the HTTP request method, get or post)
      */
-    public Get_Sessions(Spinner s, Context c)
+    public Async_Get_User_Profile(TextView chatText)
     {
 
 
-        this.context = c;
         //Store the chatText to whatever was passed in as a parameter
-        this.sessions = s;
+        this.chatText = chatText;
 
         //Create an instace of the DefaulthttpClient class
         this.client = new DefaultHttpClient();
@@ -124,11 +111,8 @@ public class Get_Sessions extends AsyncTask<String, Void, String> {
      */
     protected void onPostExecute(String results)
     {
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        sessions.setAdapter(adapter);
+        //Set the text of the chat text to the results passed in as a parameter in the form of an html page
+        this.chatText.setText("Username: " + Html.fromHtml(results));
     }
 
     /**
@@ -140,17 +124,14 @@ public class Get_Sessions extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... arg0)
     {
 
-
         try {
-
             //Store the session number which is the first parameter passed in
             String user = arg0[0];
 
-            Log.d("username",user);
-
+            Log.d("username: ", user);
             // A URI is a uniform resource identifier which allows us to access resources over the web
             //This method sets the URI for the HttpGet Object (req)
-            req.setURI(new URI("http://people.eecs.ku.edu/~aknutsen/448_Project4/Get_Sessions.php?username="+ URLEncoder.encode(user, "utf-8")));
+            req.setURI(new URI("http://people.eecs.ku.edu/~aknutsen/448_Project4/Get_Profile.php?username="+ URLEncoder.encode(user, "utf-8")));
 
             //Executes the HTTP Request (using the execute method, the HttpGet Object (req) and the DefaultHttpClient Object client)
             HttpResponse res = client.execute(req);
@@ -163,30 +144,15 @@ public class Get_Sessions extends AsyncTask<String, Void, String> {
 
             //Read lines
             String line = input.readLine();
-
-            String my_string = "";
-            for(int i =0; i < line.length(); i++) {
-
-                if(line.substring(i,i+1).equals("!")) {
-                    Log.d("MY STRING:", my_string);
-                    items.add(Html.fromHtml(my_string).toString());
-                    my_string = "";
-                }
-
-                else {
-
-                    my_string = my_string + line.substring(i,i+1);
-
-                }
+            while (line != null) {
+                //Append new strings
+                stringB.append(line);
+                line = input.readLine();
             }
-
-
-            Log.d("Herefsklkjlsdfkjldfskjl","Here");
             //Close the input
             input.close();
 
             //Convert the buffered string to a string and return it
-
             return stringB.toString();
         }
 

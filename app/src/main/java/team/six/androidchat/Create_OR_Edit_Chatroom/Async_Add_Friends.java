@@ -1,4 +1,4 @@
-package team.six.androidchat.Adding_User;
+package team.six.androidchat.Add_OR_Edit_User;
 
 
 import android.content.Context;
@@ -15,9 +15,8 @@ import java.net.URL;
 
 import java.net.URLEncoder;
 
-import team.six.androidchat.Create_New_Chatroom.Verify_Existing_Chatroom;
-import team.six.androidchat.Main2Activity;
-import team.six.androidchat.Validating_User.Authentication;
+import team.six.androidchat.Create_OR_Edit_Chatroom.Verify_Existing_Chatroom;
+import team.six.androidchat.Activity_Main_Page;
 import team.six.androidchat.Validating_User.Verify_Existing_User;
 
 /**
@@ -50,7 +49,7 @@ public class Async_Add_Friends  extends AsyncTask<String, Void, String>  {
             Toast toast = Toast.makeText(context, "Friend added!", duration);
             toast.show();
 
-            Intent intent = new Intent(context, Main2Activity.class);
+            Intent intent = new Intent(context, Activity_Main_Page.class);
 
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 

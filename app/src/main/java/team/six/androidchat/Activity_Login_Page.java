@@ -11,7 +11,7 @@ import team.six.androidchat.Not_To_Important.ViewPagerAdapter;
 /**
  * Created by cesaravalos on 5/2/16.
  */
-public class MainActivity extends AppCompatActivity
+public class Activity_Login_Page extends AppCompatActivity
 {
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstance)
     {
         super.onCreate(savedInstance);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login_page);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);

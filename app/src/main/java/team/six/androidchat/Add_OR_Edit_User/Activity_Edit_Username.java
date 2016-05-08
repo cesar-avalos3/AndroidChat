@@ -1,7 +1,6 @@
-package team.six.androidchat.Adding_User;
+package team.six.androidchat.Add_OR_Edit_User;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,16 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import team.six.androidchat.Main2Activity;
-import team.six.androidchat.MainActivity;
 import team.six.androidchat.R;
 
-public class EditPassword extends AppCompatActivity {
+public class Activity_Edit_Username extends AppCompatActivity {
 
-    private EditText user;
-    private EditText old_password;
-    private EditText new_password;
-    private EditText confirm_new_password;
+    private EditText old_user;
+    private EditText password;
+    private EditText new_user;
+    private EditText confirm_new_user;
     private Button send;
 
 
@@ -26,13 +23,13 @@ public class EditPassword extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_edit_password);
+        setContentView(R.layout.activity_edit_username);
 
-        user = (EditText) findViewById(R.id.username);
-        old_password = (EditText) findViewById(R.id.old_password);
-        new_password = (EditText) findViewById(R.id.new_password);
-        confirm_new_password = (EditText) findViewById(R.id.confirm_new_password);
-        send = (Button) findViewById(R.id.new_edit_pass);
+        old_user = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
+        new_user = (EditText) findViewById(R.id.new_username);
+        confirm_new_user = (EditText) findViewById(R.id.confirm_new_username);
+        send = (Button) findViewById(R.id.new_edit_user);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +37,7 @@ public class EditPassword extends AppCompatActivity {
             //Call the sendMessages when the email red button is clicked
             public void onClick(View view) {
 
-                updatePassword();
+                updateUser();
 
             }
         });
@@ -48,22 +45,22 @@ public class EditPassword extends AppCompatActivity {
 
     }
 
-    public void updatePassword()
+    public void updateUser()
     {
         //Get the message context from the inpuTextstring textbox
-        String userToEdit = user.getText().toString();
+        String userToEdit = old_user.getText().toString();
         //Get the author from the authorText textbox
-        String passwordToEdit = old_password.getText().toString();
+        String pass = password.getText().toString();
 
-        String new_pass = new_password.getText().toString();
-        String confirm_new = confirm_new_password.getText().toString();
+        String new_us = new_user.getText().toString();
+        String confirm_new = confirm_new_user.getText().toString();
         //Create an instance of the Sending Message Class
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
 
-        if(!(new_pass.equals(confirm_new))) {
+        if(!(new_us.equals(confirm_new))) {
             Context context = getApplicationContext();
-            CharSequence text = "New Passwords do not match!";
+            CharSequence text = "New usernames do not match!";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);
@@ -73,7 +70,7 @@ public class EditPassword extends AppCompatActivity {
         else {
 
 
-            new Async_Edit_Password(getApplicationContext()).execute(userToEdit, new_pass, passwordToEdit);
+            new Async_Edit_Username(getApplicationContext()).execute(userToEdit, new_us, pass);
 
 
         }
@@ -83,3 +80,4 @@ public class EditPassword extends AppCompatActivity {
 
 
 }
+

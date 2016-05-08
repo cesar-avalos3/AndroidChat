@@ -3,21 +3,18 @@ package team.six.androidchat.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import team.six.androidchat.Create_New_Chatroom.Add_Friends;
-import team.six.androidchat.Create_New_Chatroom.CreateRoom;
-import team.six.androidchat.MainActivity;
+import team.six.androidchat.Create_OR_Edit_Chatroom.Activity_Add_Friends;
+import team.six.androidchat.Create_OR_Edit_Chatroom.Activity_Create_Room;
 import team.six.androidchat.R;
-import team.six.androidchat.Sending_Recieving.Get_Sessions;
-import team.six.androidchat.Validating_User.Authentication;
+import team.six.androidchat.Sending_Recieving.Async_Get_Sessions;
+import team.six.androidchat.Validating_User.Async_Authenticate_User;
 
 /**
  * Created by cesaravalos on 5/2/16.
@@ -55,7 +52,7 @@ public class FragmentSessions extends Fragment implements AdapterView.OnItemSele
             //Method to define what happens when the button is clicked
             //Call the sendMessages when the email red button is clicked
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), CreateRoom.class);
+                Intent intent = new Intent(view.getContext(), Activity_Create_Room.class);
 
                 // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
                 startActivity(intent);
@@ -67,16 +64,16 @@ public class FragmentSessions extends Fragment implements AdapterView.OnItemSele
             //Method to define what happens when the button is clicked
             //Call the sendMessages when the email red button is clicked
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),Add_Friends.class);
+                Intent intent = new Intent(view.getContext(),Activity_Add_Friends.class);
 
                 // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
                 startActivity(intent);
             }
         });
 
-        Get_Sessions task = new Get_Sessions(spin,view.getContext());
+        Async_Get_Sessions task = new Async_Get_Sessions(spin,view.getContext());
 
-        task.execute(Authentication.getUsername());
+        task.execute(Async_Authenticate_User.getUsername());
 
 
         spin.setOnItemSelectedListener(this);

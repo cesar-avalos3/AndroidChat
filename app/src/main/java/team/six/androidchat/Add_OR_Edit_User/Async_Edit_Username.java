@@ -1,4 +1,4 @@
-package team.six.androidchat.Adding_User;
+package team.six.androidchat.Add_OR_Edit_User;
 
 
 import android.content.Context;
@@ -15,8 +15,9 @@ import java.net.URL;
 
 import java.net.URLEncoder;
 
-import team.six.androidchat.Main2Activity;
-import team.six.androidchat.Validating_User.Authentication;
+import team.six.androidchat.Activity_Login_Page;
+import team.six.androidchat.Activity_Main_Page;
+import team.six.androidchat.Validating_User.Async_Authenticate_User;
 import team.six.androidchat.Validating_User.Verify_Existing_User;
 
 /**
@@ -47,7 +48,7 @@ public class Async_Edit_Username  extends AsyncTask<String, Void, String>  {
             //Create Intent Object
             //First parameter is a Context - this object is a subclass of Activity which is a subclass of Context
             //Second parameter - Class to which the intent should be delivered (i.e. the activity that should be started)
-            Intent intent = new Intent(context, Main2Activity.class);
+            Intent intent = new Intent(context, Activity_Login_Page.class);
 
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -76,7 +77,7 @@ public class Async_Edit_Username  extends AsyncTask<String, Void, String>  {
 
 
 
-        Authentication my_authentication = new Authentication();
+        Async_Authenticate_User my_authentication = new Async_Authenticate_User();
         Verify_Existing_User my_verify = new Verify_Existing_User();
         if(my_authentication.authenticate(username,pass) && !(my_verify.verifyUser((new_user)))) {
 

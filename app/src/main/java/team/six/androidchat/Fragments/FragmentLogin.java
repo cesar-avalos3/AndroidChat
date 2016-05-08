@@ -1,20 +1,17 @@
 package team.six.androidchat.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import team.six.androidchat.Adding_User.Add_Account;
+import team.six.androidchat.Add_OR_Edit_User.Activity_Add_Account;
 import team.six.androidchat.R;
-import team.six.androidchat.Validating_User.Authentication;
+import team.six.androidchat.Validating_User.Async_Authenticate_User;
 
 /**
  * Created by cesaravalos on 5/2/16.
@@ -74,7 +71,7 @@ public class FragmentLogin extends Fragment{
 
 
 
-        Authentication my_validate = new Authentication(user,password,getContext());
+        Async_Authenticate_User my_validate = new Async_Authenticate_User(user,password,getContext());
 
         my_validate.execute(user.getText().toString(), password.getText().toString());
 
@@ -89,7 +86,7 @@ public class FragmentLogin extends Fragment{
         //Create Intent Object
         //First parameter is a Context - this object is a subclass of Activity which is a subclass of Context
         //Second parameter - Class to which the intent should be delivered (i.e. the activity that should be started)
-        Intent intent = new Intent(this.getActivity(), Add_Account.class);
+        Intent intent = new Intent(this.getActivity(), Activity_Add_Account.class);
 
         // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
         startActivity(intent);
