@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:id="@+id/sesMess"
+        android:scrollbars = "vertical"
+        android:layout_alignParentTop = "true"
+
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <EditText
+            android:layout_width="229dp"
+            android:layout_height="match_parent"
+            android:id="@+id/messageInput"
+            android:text="Message" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/sendMess"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@android:drawable/ic_dialog_email" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/refresh"
+            android:layout_width="60dp"
+            android:layout_height="80dp"
+            android:src="@android:drawable/ic_menu_rotate"  />
+    </LinearLayout>
+
+
+
+</LinearLayout>
+

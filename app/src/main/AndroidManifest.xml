@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="team.six.androidchat">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-            android:name=".SplashActivity"
+            android:name=".Not_To_Important.SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,11 +23,31 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".Activity_Login_Page"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustNothing">
-
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".Add_OR_Edit_User.Activity_Add_Account"
+            android:label="@string/title_activity_send__verification"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".Activity_Main_Page"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Create_OR_Edit_Chatroom.Activity_Create_Room"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Create_OR_Edit_Chatroom.Activity_Add_Friends"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".Add_OR_Edit_User.Activity_Edit_Password"
+            android:label="@string/title_activity_edit_password"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Add_OR_Edit_User.Activity_Edit_Username"
+            android:windowSoftInputMode="adjustPan"></activity>
     </application>
 
 </manifest>

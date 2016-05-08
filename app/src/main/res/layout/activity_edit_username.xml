@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:id="@+id/new_edit_user"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="300dp" />
+
+
+    <EditText
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:layout_gravity="center_horizontal"
+        android:text="Enter Username" />
+
+    <EditText
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/password"
+        android:layout_gravity="center_horizontal"
+        android:text="Password" />
+
+    <EditText
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/new_username"
+        android:layout_gravity="center_horizontal"
+        android:text="New Username" />
+
+    <EditText
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/confirm_new_username"
+        android:layout_gravity="center_horizontal"
+        android:text="Confirm New Username" />
+
+</LinearLayout>

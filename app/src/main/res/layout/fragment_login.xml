@@ -2,29 +2,47 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
+
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:text="Connect"
+        android:layout_gravity="center_horizontal"
+        android:text="Create User"
+        android:id="@+id/create" />
+
+    <TextView
+        android:layout_width="372dp"
+        android:layout_height="50dp"
+        android:textSize = "20sp"
+        android:text ="Welcome to Team 6 Android Chat"
+        android:gravity = "center_horizontal|center_vertical" />
+
+
+    <Button
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:text="Login"
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="300dp" />
 
     <EditText
         android:layout_width="296dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:id="@+id/user"
         android:layout_gravity="center_horizontal"
         android:text="User" />
 
     <EditText
         android:layout_width="304dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
+        android:layout_height="40dp"
         android:ems="10"
         android:id="@+id/password"
         android:layout_gravity="center_horizontal"
         android:text="Password" />
+
+
 </LinearLayout>
