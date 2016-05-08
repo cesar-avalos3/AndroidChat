@@ -1,8 +1,8 @@
 /**
  *
- * @author Cesar Avalos, Alec Knutsen
- * @date  4/3/2016
- * @filename Async_Recieve_Messages.java
+ * @author Alec Knutsen
+ * @date  5/8/2-16
+ * @filename Async_Get_User_Profile.java
  *
  */
 
@@ -16,8 +16,6 @@ import android.os.AsyncTask;
 //Used to display HTML in a textview
 import android.text.Html;
 
-//Used for debuggging
-import android.util.Log;
 
 //For modifying a text view
 import android.widget.TextView;
@@ -45,7 +43,7 @@ import java.net.URLEncoder;
  * This method allows us to preform operations in the background without interupting the apps user interface.
  * </p>
  * <p>
- * The <code>doBackground</code> method submits an HTTP get request. If the request runs through, the text of the page is returned in a string
+ * The <code>doBackground</code> method submits an HTTP get request.
  *
  * @author Cesar Avalos, Alec Knutsen
  * @see AsyncTask
@@ -56,12 +54,6 @@ public class Async_Get_User_Profile extends AsyncTask<String, Void, String> {
      * Variable that will store an instance of the HttpClient Class
      */
     HttpClient client;
-
-
-    /**
-     * Define a instance variable of Type Action (where ACTION is the enum above). Either get or post request
-     */
-    ACTION state;
 
     /**
      * Variable that will store an instance of the HttpGet Class
@@ -75,19 +67,9 @@ public class Async_Get_User_Profile extends AsyncTask<String, Void, String> {
 
 
     /**
-     *Create a new enum for get and post requests
-     * Two commonly used methods for a request-response between a client and server are: GET and POST.
-     * GET - Requests data from a specified resource
-     * POST - Submits data to be processed to a specified resource
-     */
-    public enum ACTION {GET, POST};
-
-
-    /**
-     * Instantiates instance variables <code>state</code>,<code>chatText</code>,<code>client</code>, and <code>req</code>
+     * Instantiate all class variables
      *
-     * @param chatText the TextView to be modified with all the messages from the chat
-     * @param state the Action which the instance variable state will be set to (represents the HTTP request method, get or post)
+     * @param chatText the TextView to be modified with the username of the user
      */
     public Async_Get_User_Profile(TextView chatText)
     {
@@ -125,10 +107,9 @@ public class Async_Get_User_Profile extends AsyncTask<String, Void, String> {
     {
 
         try {
-            //Store the session number which is the first parameter passed in
+            //Store the user which is the first parameter passed in
             String user = arg0[0];
 
-            Log.d("username: ", user);
             // A URI is a uniform resource identifier which allows us to access resources over the web
             //This method sets the URI for the HttpGet Object (req)
             req.setURI(new URI("http://people.eecs.ku.edu/~aknutsen/448_Project4/Get_Profile.php?username="+ URLEncoder.encode(user, "utf-8")));
@@ -158,7 +139,6 @@ public class Async_Get_User_Profile extends AsyncTask<String, Void, String> {
 
         //Catch any errors
         catch (Exception e) {
-            Log.e("Not able to connect: ", e.getMessage());
         }
 
 

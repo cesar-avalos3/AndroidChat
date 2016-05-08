@@ -1,3 +1,13 @@
+/**
+ *
+ * @author Alec Knutsen, Cesar Avalos
+ * @date  5/8/2016
+ * @filename FragmentLogin.java
+ * Fragment associated with displaying the initial login page
+ *
+ */
+
+
 package team.six.androidchat.Fragments;
 
 import android.content.Intent;
@@ -13,19 +23,21 @@ import team.six.androidchat.Add_OR_Edit_User.Activity_Add_Account;
 import team.six.androidchat.R;
 import team.six.androidchat.Validating_User.Async_Authenticate_User;
 
-/**
- * Created by cesaravalos on 5/2/16.
- */
+
 public class FragmentLogin extends Fragment{
 
+    //Declare all texts and buttons
     private EditText user;
     private EditText password;
     private Button connect;
-
     private Button create;
 
-    public FragmentLogin(){}
 
+    /**
+     * Call parent onCreate
+     *
+     * @param savedInstance
+     */
     public void onCreate(Bundle savedInstance)
     {
         super.onCreate(savedInstance);
@@ -33,18 +45,31 @@ public class FragmentLogin extends Fragment{
 
     }
 
+
+    /**
+     * Initializes all buttons and textboxes and sets click listeners
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstance
+     * @return View - View associated with FragmentChatLayout
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance)
     {
+        //Store view
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
+        //Initialize all buttons and textboxes
         user = (EditText) view.findViewById(R.id.user);
         password = (EditText) view.findViewById(R.id.password);
         connect = (Button) view.findViewById(R.id.button);
         create = (Button) view.findViewById(R.id.create);
 
+        //Set text of textboxes
         user.setText("username");
         password.setText("password");
 
+        //Set click listeners for buttons
         connect.setOnClickListener(new View.OnClickListener() {
             @Override
             //Method to define what happens when the button is clicked
@@ -53,7 +78,6 @@ public class FragmentLogin extends Fragment{
                 login();
             }
         });
-
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             //Method to define what happens when the button is clicked
@@ -63,16 +87,20 @@ public class FragmentLogin extends Fragment{
             }
         });
 
+        //Return associated view
         return view;
     }
 
-    //Login method
+    /**
+     * Uses Async_Authenticate_User to validate if the user exists
+     */
     private void login() {
 
 
-
+        //Create instance of Async_Authenticate_User
         Async_Authenticate_User my_validate = new Async_Authenticate_User(user,password,getContext());
 
+        //Execute
         my_validate.execute(user.getText().toString(), password.getText().toString());
 
 
@@ -81,6 +109,9 @@ public class FragmentLogin extends Fragment{
 
     }
 
+    /**
+     * Method that goes to the Activity_Add_Account activity
+     */
     private void createUser() {
 
         //Create Intent Object

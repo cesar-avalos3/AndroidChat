@@ -17,8 +17,6 @@ import android.os.AsyncTask;
 //Used to display HTML in a textview
 import android.text.Html;
 
-//Used for debuggging
-import android.util.Log;
 
 //For modifying a text view
 import android.widget.ArrayAdapter;
@@ -62,11 +60,6 @@ public class Async_Get_Sessions extends AsyncTask<String, Void, String> {
 
 
     /**
-     * Define a instance variable of Type Action (where ACTION is the enum above). Either get or post request
-     */
-    ACTION state;
-
-    /**
      * Variable that will store an instance of the HttpGet Class
      */
     HttpGet req;
@@ -76,54 +69,48 @@ public class Async_Get_Sessions extends AsyncTask<String, Void, String> {
      */
     Spinner sessions;
 
+    /**
+     * Context to be added
+     */
     Context context;
 
 
+    /**
+     * Arraylist to hold all sessions for a specified user
+     */
     ArrayList<String> items = new ArrayList<>();
 
 
-    /**
-     *Create a new enum for get and post requests
-     * Two commonly used methods for a request-response between a client and server are: GET and POST.
-     * GET - Requests data from a specified resource
-     * POST - Submits data to be processed to a specified resource
-     */
-    public enum ACTION {GET, POST};
 
 
     /**
      * Instantiates instance variables <code>state</code>,<code>chatText</code>,<code>client</code>, and <code>req</code>
      *
-     * @param chatText the TextView to be modified with all the messages from the chat
-     * @param state the Action which the instance variable state will be set to (represents the HTTP request method, get or post)
+     * @param s the Spinner to be modified with all chatrooms for the user
+     * @param c - Context passed in as a a pameter
      */
     public Async_Get_Sessions(Spinner s, Context c)
     {
 
-
+        //Initialize all variables
         this.context = c;
-        //Store the chatText to whatever was passed in as a parameter
         this.sessions = s;
-
-        //Create an instace of the DefaulthttpClient class
         this.client = new DefaultHttpClient();
-
-        //Create an instace of the HttpGet class
         this.req = new HttpGet();
     }
 
 
     /**
-     * Sets the <code>chatText</code> to an HTML page with the string passed in as a parameter
+     * Sets the spinner with the sessions
      *
-     * @param results the String to display in an HTML page
+     * @param results
      */
     protected void onPostExecute(String results)
     {
 
+        //Create new ArrayAdapter (spinner) and set it
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         sessions.setAdapter(adapter);
     }
 
@@ -139,10 +126,8 @@ public class Async_Get_Sessions extends AsyncTask<String, Void, String> {
 
         try {
 
-            //Store the session number which is the first parameter passed in
+            //Store the user which is the first parameter passed in
             String user = arg0[0];
-
-            Log.d("username",user);
 
             // A URI is a uniform resource identifier which allows us to access resources over the web
             //This method sets the URI for the HttpGet Object (req)
@@ -160,11 +145,13 @@ public class Async_Get_Sessions extends AsyncTask<String, Void, String> {
             //Read lines
             String line = input.readLine();
 
+
             String my_string = "";
+            //Sessions names are seperated by !. This for loop extracts the exclamation points to get the names
             for(int i =0; i < line.length(); i++) {
 
                 if(line.substring(i,i+1).equals("!")) {
-                    Log.d("MY STRING:", my_string);
+
                     items.add(Html.fromHtml(my_string).toString());
                     my_string = "";
                 }
@@ -177,18 +164,15 @@ public class Async_Get_Sessions extends AsyncTask<String, Void, String> {
             }
 
 
-            Log.d("Herefsklkjlsdfkjldfskjl","Here");
             //Close the input
             input.close();
 
-            //Convert the buffered string to a string and return it
-
+            //Convert the buffered string to a string and return it\
             return stringB.toString();
         }
 
         //Catch any errors
         catch (Exception e) {
-            Log.e("Not able to connect: ", e.getMessage());
         }
 
 

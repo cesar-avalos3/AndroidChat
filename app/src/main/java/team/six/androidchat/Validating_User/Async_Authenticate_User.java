@@ -1,8 +1,16 @@
+/**
+ *
+ * @author  Alec Knutsen, Cesar Avalos
+ * @date 5/8/2016
+ * @filename Async_Authenticate_User.java
+ *
+ */
+
+
 package team.six.androidchat.Validating_User;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,22 +22,40 @@ import java.net.URLEncoder;
 
 import team.six.androidchat.Activity_Main_Page;
 
+
 /**
- * Created by Cesar on 5/1/2016.
+ * <p>
+ * This class contains a method <code>doInBackground</code> which overrides a method in the <code>AsyncTask</code> class.
+ * </p>
+ * <p>
+ * This method allows us to preform operations in the background without interupting the apps user interface.
+ * </p>
+ *  * <p>
+ * This class contains a method <code>onPostExecute</code> which overrides a method in the <code>AsyncTask</code> class.
+ * </p>
+ * <p>
+ * This method allows us to preform operations after doInBackground has completed.
+ * </p>
+ *
+ * @author Alec Knutsen, Cesar Avalos
+ * @see AsyncTask
  */
 public class Async_Authenticate_User extends AsyncTask<String, Void, String>{
 
 
-    public boolean final_val;
-
+    //Store all class variables
     private EditText user;
     private EditText password;
-
     private static String username = "";
-
     private Context context;
 
 
+    /***
+     * Constructor that initialize the context username and password
+     * @param u - Username
+     * @param p - Password
+     * @param c - Context
+     */
     public Async_Authenticate_User(EditText u, EditText p, Context c)
     {
         this.user = u;
@@ -38,135 +64,142 @@ public class Async_Authenticate_User extends AsyncTask<String, Void, String>{
 
     }
 
+    /**
+     * Another constructor that does nothing
+     */
     public Async_Authenticate_User()
     {
 
     }
 
+    /**
+     * Verifies user
+     * @param user - User to verify
+     * @param pass - Password of user to verify
+     * @return - boolean - Returns true if the user and password exist, false otherwise
+     */
     public static boolean authenticate(String user, String pass)
     {
         try {
 
+            //Store username and password
             String password = pass;
             String userName = user;
-            String urlLink = "http://people.eecs.ku.edu/~aknutsen/448_Project4/AndroidChatVerifyUser.php?username=" + URLEncoder.encode(userName, "utf-8")+ "&password=" + URLEncoder.encode(password, "utf-8");
 
+            //Get url
+            String urlLink = "http://people.eecs.ku.edu/~aknutsen/448_Project4/AndroidChatVerifyUser.php?username=" + URLEncoder.encode(userName, "utf-8")+ "&password=" + URLEncoder.encode(password, "utf-8");
+            //Create new url object
             URL url = new URL(urlLink);
+            //Establish connection
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            //Create buffered reader
             BufferedReader bf = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
             String inputLine ="false";
+            //If the user is valid, the file will read "true"
             while( bf.readLine() != null) {
                 inputLine ="true";
             }
 
-
-
+            //If the user is valid, return true
             if(inputLine.equals("true")) {
-                Log.d("Input Line:", inputLine);
+
                 return true;
             }
+
+            //If the user is not vali return false
             else
             {
-                Log.d("Input Line:", inputLine);
+
                 return false;
             }
-        }catch (Exception e)
+        }
+        catch (Exception e)
         {
 
-            Log.d("This is trooo", e.getMessage());
         }
+
+        //Return false if request does not go through
         return false;
     }
 
+    /**
+     * Calls authenticate method
+     *
+     * @param arg0 the String... represents an array of strings which can be of varying length [represents session_num in this case].
+     * @return returns an empty string
+     */
     protected String doInBackground(String... arg0) {
+
+        //If the user is valid, return the string "true"
         if(authenticate(arg0[0],arg0[1]))
         {
-            Log.d("doInBackGround:", "true");
+
             return "true";
         }
+
+        //If the user is not valid, return the string "false"
         else
         {
-            Log.d("doInBackGround:", "false");
+
             return "false";
         }
     }
 
-    @Override
+    /**
+     * Implement interface method
+     */
     protected void onPreExecute() {
         super.onPreExecute();
     }
 
 
-    //Good lord this is a terrible way to do it
-    protected void onPostExecute(String results)
-    {
-        boolean temp;
-        if(results.equals("true"))
-        {
+    /**
+     * Starts new activity if user is authenticated, otherwise toast an error
+     * @param results - String returned from doInBackground
+     */
+    protected void onPostExecute(String results) {
+        //If the user is authenticated
+        if (results.equals("true")) {
+            //Store the username
             username = user.getText().toString();
 
-            //Create Intent Object
-            //First parameter is a Context - this object is a subclass of Activity which is a subclass of Context
-            //Second parameter - Class to which the intent should be delivered (i.e. the activity that should be started)
+            //Start the main screen
             Intent intent = new Intent(context, Activity_Main_Page.class);
-
-            // Call method startActivity  from the android Intent Class (i.e. start the chatActivity)
             context.startActivity(intent);
 
+            //Print a welcome message
             int duration = Toast.LENGTH_SHORT;
-
             Toast toast = Toast.makeText(context, "WELCOME " + username + "!", duration);
             toast.show();
 
 
-            final_val = true;
-
         }
-        else
-        {
-            int duration = Toast.LENGTH_SHORT;
 
+        //If the user is not authenticated
+        else {
+            //Print an error
+            int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, "Invalid Username or Password!", duration);
             toast.show();
-            Log.d("onPostExecute:", "false");
-            final_val = false;
-        }
-        login();
 
-    }
-
-    public boolean getFinalVal() {
-
-        Log.d("getFinalVal:", final_val+"");
-        return(final_val);
-    }
-
-    public void login() {
-
-
-
-        if(final_val) {
-
-            //Do Something here
-            Log.d("here","Validated");
-
-
-        }
-
-        else {
-
-            //Do something here
-            Log.d("here","Not validated");
         }
 
     }
 
+    /**
+     * Sets the static username
+     * @param u - Sets the username class variable to the value passed in
+     */
     public static void setUsername(String u) {
 
         username = u;
 
     }
 
+    /**
+     * Returns the class variable username
+     * @return
+     */
     public static String getUsername() {
 
         return(username);

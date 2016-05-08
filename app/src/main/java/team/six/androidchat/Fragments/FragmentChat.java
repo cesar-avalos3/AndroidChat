@@ -1,3 +1,13 @@
+/**
+ *
+ * @author Alec Knutsen, Cesar Avalos
+ * @date  5/8/2016
+ * @filename FragmentChat.java
+ * Fragment associated with displaying chat on main page
+ *
+ */
+
+
 package team.six.androidchat.Fragments;
 
 import android.os.Bundle;
@@ -24,38 +34,60 @@ public class FragmentChat extends Fragment
 {
 
     /**
-     * Instane variable associated with displaying all messages in a specified session
+     * Instance variable for textboxes and buttons
      */
     private TextView session_messages;
 
-
-    /**
-     * Instane variable associated with allowing the user to input a message
-     */
     private EditText user_message;
 
     private FloatingActionButton sendMessage;
 
     private FloatingActionButton refresh_page;
 
+    //Stores the current session number
     private String currentSessionNumber;
 
 
+    /**
+     * Call parent onCreate
+     *
+     * @param savedInstance
+     */
+    public void onCreate(Bundle savedInstance)
+    {
+        super.onCreate(savedInstance);
+
+
+    }
+
+
+
+    /**
+     * Initializes all buttons and textboxes and sets  click listeners
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstance
+     * @return View - View associated with FragmentChatLayout
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance)
     {
 
+        //Find associated view
         View view = inflater.inflate(R.layout.fragment_chat, container, false);
 
+        //Initializes textbox for displaying messages
         session_messages = (TextView) view.findViewById(R.id.sesMess);
-
+        //Establish scrolling for messages
         session_messages.setMovementMethod(new ScrollingMovementMethod());
 
-        user_message = (EditText) view.findViewById(R.id.messageInput);
 
+        //Initialize message input
+        user_message = (EditText) view.findViewById(R.id.messageInput);
         user_message.setText("Message");
 
+        //Initialize buttons
         sendMessage = (FloatingActionButton) view.findViewById(R.id.sendMess);
-
         refresh_page = (FloatingActionButton) view.findViewById(R.id.refresh);
 
         //Set a listener to preform action when the red email button is clicked
@@ -65,6 +97,7 @@ public class FragmentChat extends Fragment
             //Call the sendMessages when the email red button is clicked
             public void onClick(View view) {
 
+                //Send the chat messages
                 sendMessages();
                 handler.post(timedTask);
 
@@ -78,10 +111,8 @@ public class FragmentChat extends Fragment
             //Call the getMessages when the sync red button is clicked
             @Override public void onClick(View v) {
 
-                //Different behavior now, whatever the chat session it currently is at
-                //when we click the button, this is what timedTask is going to call
 
-                Log.d("here", FragmentSessions.getSession());
+                //Get the current session number and get the chat messages
                 currentSessionNumber = FragmentSessions.getSession();
                 getChatMessages();
                 handler.post(timedTask);
@@ -137,9 +168,9 @@ public class FragmentChat extends Fragment
      */
     public void sendMessages()
     {
-        //Get the message context from the inpuTextstring textbox
+        //Get the message content
         String stringToAdd = user_message.getText().toString();
-        //Get the author from the authorText textbox
+        //Get the author
         String authorToAdd = Async_Authenticate_User.getUsername();
 
         //Create an instance of the Sending Message Class

@@ -39,13 +39,17 @@ import java.net.URLEncoder;
 
 /**
  * <p>
- * This class contains a method <code>doBackground</code> which overrides a method in the <code>AsyncTask</code> class.
+ * This class contains a method <code>doInBackground</code> which overrides a method in the <code>AsyncTask</code> class.
  * </p>
  * <p>
  * This method allows us to preform operations in the background without interupting the apps user interface.
  * </p>
+ *  * <p>
+ * This class contains a method <code>onPostExecute</code> which overrides a method in the <code>AsyncTask</code> class.
+ * </p>
  * <p>
- * The <code>doBackground</code> method submits an HTTP get request. If the request runs through, the text of the page is returned in a string
+ * This method allows us to preform operations after doInBackground has completed.
+ * </p>
  *
  * @author Cesar Avalos, Alec Knutsen
  * @see AsyncTask
@@ -57,7 +61,6 @@ public class Async_Recieve_Messages extends AsyncTask<String, Void, String> {
      */
     HttpClient client;
 
-    boolean dontdothisAuthentication = false;
 
     /**
      * Define a instance variable of Type Action (where ACTION is the enum above). Either get or post request
