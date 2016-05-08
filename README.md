@@ -3,7 +3,7 @@ EECS 448 Final Project
 
 Collaborators: Alec Knutsen, Yarden Tamir, Cesar Avalos, and John Russell
 
-Implementation of an Anroid Chat Program:
+Implementation of an Android Chat Program
 
 Notes:
 
