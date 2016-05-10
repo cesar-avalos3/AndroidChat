@@ -86,7 +86,7 @@ public class Activity_Create_Room extends AppCompatActivity {
         Context context = getApplicationContext();
 
         //Use Aysnc_Create_Room to handle database interactions and creating the room
-        new Async_Create_Room(context).execute(roomToAdd);
+        new Async_Create_Room(context,false).execute(roomToAdd);
 
 
 

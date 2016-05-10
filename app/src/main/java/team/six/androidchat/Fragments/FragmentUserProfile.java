@@ -110,7 +110,7 @@ public class FragmentUserProfile extends Fragment {
 
 
         //Declare an instance of Async_Get_User_Profile to get the profile of the user on create
-        Async_Get_User_Profile my_task = new Async_Get_User_Profile(sessions);
+        Async_Get_User_Profile my_task = new Async_Get_User_Profile(sessions,false);
         my_task.execute(Async_Authenticate_User.getUsername());
         //Return the view
         return view;

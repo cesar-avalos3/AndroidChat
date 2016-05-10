@@ -106,7 +106,7 @@ public class Activity_Add_Account extends AppCompatActivity {
         //If the password and confirmed password are equal, use Async_Add_Account to handle adding the user
         else {
 
-            new Async_Add_Account(this).execute(userToAdd, passwordToAdd);
+            new Async_Add_Account(this,false).execute(userToAdd, passwordToAdd);
 
         }
 

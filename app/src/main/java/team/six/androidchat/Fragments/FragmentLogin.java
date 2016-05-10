@@ -19,9 +19,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import team.six.androidchat.Activity_Main_Page;
 import team.six.androidchat.Add_OR_Edit_User.Activity_Add_Account;
 import team.six.androidchat.R;
 import team.six.androidchat.Validating_User.Async_Authenticate_User;
+import team.six.androidchat.testSuite.Activity_Test;
 
 
 public class FragmentLogin extends Fragment{
@@ -31,6 +33,7 @@ public class FragmentLogin extends Fragment{
     private EditText password;
     private Button connect;
     private Button create;
+    private Button test;
 
 
     /**
@@ -64,6 +67,7 @@ public class FragmentLogin extends Fragment{
         password = (EditText) view.findViewById(R.id.password);
         connect = (Button) view.findViewById(R.id.button);
         create = (Button) view.findViewById(R.id.create);
+        test = (Button) view.findViewById((R.id.test));
 
         //Set text of textboxes
         user.setText("username");
@@ -87,6 +91,19 @@ public class FragmentLogin extends Fragment{
             }
         });
 
+        //Click listener for test suite
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //Method to define what happens when the button is clicked
+            //Go to testActivity when the button is clicked
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), Activity_Test.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(intent);
+            }
+        });
+
+
         //Return associated view
         return view;
     }
@@ -98,7 +115,7 @@ public class FragmentLogin extends Fragment{
 
 
         //Create instance of Async_Authenticate_User
-        Async_Authenticate_User my_validate = new Async_Authenticate_User(user,password,getContext());
+        Async_Authenticate_User my_validate = new Async_Authenticate_User(user,password,getContext(),false);
 
         //Execute
         my_validate.execute(user.getText().toString(), password.getText().toString());

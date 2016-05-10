@@ -97,7 +97,7 @@ public class FragmentSessions extends Fragment implements AdapterView.OnItemSele
         });
 
         //Declare and execute the Async_Get_Sessions class to fill in the spinner with chatroom names
-        Async_Get_Sessions task = new Async_Get_Sessions(spin,view.getContext());
+        Async_Get_Sessions task = new Async_Get_Sessions(spin,view.getContext(),false);
 
         task.execute(Async_Authenticate_User.getUsername());
 

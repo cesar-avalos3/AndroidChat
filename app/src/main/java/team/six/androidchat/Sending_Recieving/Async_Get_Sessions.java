@@ -20,6 +20,7 @@ import android.text.Html;
 
 //For modifying a text view
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 
@@ -36,6 +37,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+
+import team.six.androidchat.testSuite.Activity_Test;
 
 
 /**
@@ -74,6 +77,11 @@ public class Async_Get_Sessions extends AsyncTask<String, Void, String> {
      */
     Context context;
 
+    //Variables for testing
+    private boolean test;
+    private StringBuffer  test_result;
+    private EditText test_screen;
+
 
     /**
      * Arraylist to hold all sessions for a specified user
@@ -83,13 +91,16 @@ public class Async_Get_Sessions extends AsyncTask<String, Void, String> {
 
 
 
+
+
     /**
      * Instantiates instance variables <code>state</code>,<code>chatText</code>,<code>client</code>, and <code>req</code>
      *
      * @param s the Spinner to be modified with all chatrooms for the user
      * @param c - Context passed in as a a pameter
+     * @param t - Boolean passed in
      */
-    public Async_Get_Sessions(Spinner s, Context c)
+    public Async_Get_Sessions(Spinner s, Context c, boolean t)
     {
 
         //Initialize all variables
@@ -97,6 +108,23 @@ public class Async_Get_Sessions extends AsyncTask<String, Void, String> {
         this.sessions = s;
         this.client = new DefaultHttpClient();
         this.req = new HttpGet();
+
+        test = t;
+    }
+
+    /**
+     * Alternate constructor for just initializing the boolean
+     * @param t - Boolean passed in
+     * @param text - Textview with test results
+     * @param test_res - String holding test results
+     */
+    public Async_Get_Sessions(boolean t, EditText text, StringBuffer  test_res)
+    {
+
+        test = t;
+        test_screen = text;
+        test_result = test_res;
+
     }
 
 
@@ -108,10 +136,24 @@ public class Async_Get_Sessions extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String results)
     {
 
-        //Create new ArrayAdapter (spinner) and set it
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sessions.setAdapter(adapter);
+        //If we are only testing
+        if(test) {
+
+
+        }
+
+        //If we are not testing
+        else {
+
+
+            //Create new ArrayAdapter (spinner) and set it
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, items);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sessions.setAdapter(adapter);
+
+        }
+
+
     }
 
     /**

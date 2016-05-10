@@ -18,6 +18,7 @@ import android.text.Html;
 
 
 //For modifying a text view
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -66,12 +67,21 @@ public class Async_Get_User_Profile extends AsyncTask<String, Void, String> {
     TextView chatText;
 
 
+    //Variables for testing
+    private boolean test;
+    private StringBuffer  test_result;
+    private EditText test_screen;
+
+
     /**
      * Instantiate all class variables
      *
      * @param chatText the TextView to be modified with the username of the user
+     * @param t - Boolean passed in
+     * @param text - Textview with test results
+     * @param test_res - String holding test results
      */
-    public Async_Get_User_Profile(TextView chatText)
+    public Async_Get_User_Profile(TextView chatText, boolean t, EditText text, StringBuffer  test_res)
     {
 
 
@@ -83,8 +93,37 @@ public class Async_Get_User_Profile extends AsyncTask<String, Void, String> {
 
         //Create an instace of the HttpGet class
         this.req = new HttpGet();
+
+        test = t;
+        test_screen = text;
+        test_result = test_res;
+
     }
 
+
+    /**
+     * Instantiate all class variables excluding test stuff
+     *
+     * @param chatText the TextView to be modified with the username of the user
+     * @param t - Boolean passed in
+     */
+    public Async_Get_User_Profile(TextView chatText, boolean t)
+    {
+
+
+        //Store the chatText to whatever was passed in as a parameter
+        this.chatText = chatText;
+
+        //Create an instace of the DefaulthttpClient class
+        this.client = new DefaultHttpClient();
+
+        //Create an instace of the HttpGet class
+        this.req = new HttpGet();
+
+        test = t;
+
+
+    }
 
     /**
      * Sets the <code>chatText</code> to an HTML page with the string passed in as a parameter
@@ -93,9 +132,21 @@ public class Async_Get_User_Profile extends AsyncTask<String, Void, String> {
      */
     protected void onPostExecute(String results)
     {
-        //Set the text of the chat text to the results passed in as a parameter in the form of an html page
-        this.chatText.setText("Username: " + Html.fromHtml(results));
+
+        //If we are only testing
+        if(test) {
+
+        }
+
+        //If we are not testing
+        else {
+
+            //Set the text of the chat text to the results passed in as a parameter in the form of an html page
+            this.chatText.setText("Username: " + Html.fromHtml(results));
+        }
     }
+
+
 
     /**
      * Submits an HTTP get request in the background of the app

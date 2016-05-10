@@ -110,7 +110,7 @@ public class Activity_Edit_Username extends AppCompatActivity {
         //If the new username and confirmed are equal, call Async_Edit_Username to handle database interactions
         else {
 
-            new Async_Edit_Username(getApplicationContext()).execute(userToEdit, new_us, pass);
+            new Async_Edit_Username(getApplicationContext(),false).execute(userToEdit, new_us, pass);
 
         }
 

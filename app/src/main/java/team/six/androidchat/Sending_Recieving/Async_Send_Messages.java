@@ -13,6 +13,7 @@ package team.six.androidchat.Sending_Recieving;
 import android.os.AsyncTask;
 
 import android.util.Log;
+import android.widget.EditText;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -37,15 +38,47 @@ public class Async_Send_Messages extends AsyncTask<String, Void, String>  {
     HttpClient client;
     HttpGet req;
 
+    //Variables for testing
+    private boolean test;
+    private StringBuffer  test_result;
+    private EditText test_screen;
+
 
     /**
      * Constructor to initialize class variables
+     * @param t - Boolean passed in
+     * @param text - Textview with test results
+     * @param test_res - String holding test results
+     *
      */
-    public Async_Send_Messages()
+    public Async_Send_Messages(boolean t, EditText text, StringBuffer  test_res)
     {
 
         this.client = new DefaultHttpClient();
         this.req = new HttpGet();
+
+
+        test = t;
+        test_screen = text;
+        test_result = test_res;
+
+    }
+
+    /**
+     * Constructor to initialize class variables except test variables
+     * @param t - Boolean passed in
+     *
+     */
+    public Async_Send_Messages(boolean t)
+    {
+
+        this.client = new DefaultHttpClient();
+        this.req = new HttpGet();
+
+
+        test = t;
+
+
     }
 
 
@@ -61,7 +94,18 @@ public class Async_Send_Messages extends AsyncTask<String, Void, String>  {
      * Implementation of interfacce method
      * @param results
      */
-    protected void onPostExecute(String results){}
+    protected void onPostExecute(String results){
+
+        //If we are only testing
+        if(test) {
+
+        }
+
+        //If we are not testing
+        else {
+
+        }
+    }
 
     /**
      * Implementation of interfacce method

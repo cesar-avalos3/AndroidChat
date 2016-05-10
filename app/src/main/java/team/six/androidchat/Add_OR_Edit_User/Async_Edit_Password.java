@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -25,6 +26,7 @@ import java.net.URLEncoder;
 
 import team.six.androidchat.Activity_Login_Page;
 import team.six.androidchat.Validating_User.Async_Authenticate_User;
+import team.six.androidchat.testSuite.Activity_Test;
 
 /**
  * <p>
@@ -51,13 +53,40 @@ public class Async_Edit_Password  extends AsyncTask<String, Void, String>  {
     //Context the will be intiialized in the constructor
     private Context context;
 
+    //Variables for testing
+    private boolean test;
+    private StringBuffer  test_result;
+    private EditText test_screen;
+
 
     /**
      * Initalizes the context variable
      *
      * @param c Context passed in
+     * @param t - Boolean passed in
+     * @param text - Textview with test results
+     * @param test_res - String holding test results
      */
-    public Async_Edit_Password(Context c) {
+    public Async_Edit_Password(Context c, boolean t, EditText text, StringBuffer  test_res) {
+
+        test = t;
+        test_screen = text;
+        test_result = test_res;
+
+        this.context = c;
+    }
+
+    /**
+     * Initalizes all variables except test variables
+     *
+     * @param c Context passed in
+     * @param t - Boolean passed in
+     */
+    public Async_Edit_Password(Context c, boolean t) {
+
+        test = t;
+
+
         this.context = c;
     }
 
@@ -69,28 +98,59 @@ public class Async_Edit_Password  extends AsyncTask<String, Void, String>  {
      */
     protected void onPostExecute(String results){
 
-        //If the password was changed successfully
-        if(results.equals("true")) {
+        //If we are only testing
+        if(test) {
 
-            //Print toast
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, "Password changed successfully!", duration);
-            toast.show();
+            //If the task went through
+            if(results.equals("true")) {
+
+                test_result = test_result.append("Attempt change password on a valid user:\n" +
+                        " Passed\n");
+                test_screen.setText(test_result.toString());
+
+            }
+
+            //If the task did not go through
+            else {
+                test_result = test_result.append("Attempt change password on a nonexisting user:\n" +
+                        " Passed\n");
+                test_screen.setText(test_result.toString());
 
 
-            //Start new activity
-            Intent intent = new Intent(context, Activity_Login_Page.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+            }
+
         }
 
-
-        //If the request does not go through print a toast
+        //If we are not testing
         else {
 
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, "Username or old password entered incorrectly!", duration);
-            toast.show();
+
+            //If the password was changed successfully
+            if(results.equals("true")) {
+
+                //Print toast
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, "Password changed successfully!", duration);
+                toast.show();
+
+
+                //Start new activity
+                Intent intent = new Intent(context, Activity_Login_Page.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+
+
+            //If the request does not go through print a toast
+            else {
+
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, "Username or old password entered incorrectly!", duration);
+                toast.show();
+            }
+
+
+
         }
 
     }

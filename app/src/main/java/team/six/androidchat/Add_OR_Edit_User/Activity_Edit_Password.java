@@ -112,7 +112,7 @@ public class Activity_Edit_Password extends AppCompatActivity {
         else {
 
 
-            new Async_Edit_Password(getApplicationContext()).execute(userToEdit, new_pass, passwordToEdit);
+            new Async_Edit_Password(getApplicationContext(),false).execute(userToEdit, new_pass, passwordToEdit);
 
 
         }

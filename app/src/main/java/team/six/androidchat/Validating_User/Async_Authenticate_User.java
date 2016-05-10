@@ -21,6 +21,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 import team.six.androidchat.Activity_Main_Page;
+import team.six.androidchat.testSuite.Activity_Test;
 
 
 /**
@@ -50,25 +51,49 @@ public class Async_Authenticate_User extends AsyncTask<String, Void, String>{
     private Context context;
 
 
+    //Variables for testing
+    private boolean test;
+    private StringBuffer  test_result;
+    private EditText test_screen;
+
     /***
-     * Constructor that initialize the context username and password
+     * Constructor that initialize the context, username, password, and test boolean
      * @param u - Username
      * @param p - Password
      * @param c - Context
+     * @param t - Boolean passed in
      */
-    public Async_Authenticate_User(EditText u, EditText p, Context c)
+    public Async_Authenticate_User(EditText u, EditText p, Context c, boolean t)
     {
         this.user = u;
         this.password = p;
         this.context = c;
 
+        test = t;
+
     }
 
     /**
-     * Another constructor that does nothing
+     * Initialize testing boolean
+     * @param t - Boolean passed in
+     * @param text - Textview with test results
+     * @param test_res - String holding test results
+     */
+    public Async_Authenticate_User(boolean t, EditText text, StringBuffer  test_res)
+    {
+
+        test = t;
+        test_screen = text;
+        test_result = test_res;
+
+    }
+
+    /**
+     * Empty contructor
      */
     public Async_Authenticate_User()
     {
+
 
     }
 
@@ -158,29 +183,60 @@ public class Async_Authenticate_User extends AsyncTask<String, Void, String>{
      * @param results - String returned from doInBackground
      */
     protected void onPostExecute(String results) {
-        //If the user is authenticated
-        if (results.equals("true")) {
-            //Store the username
-            username = user.getText().toString();
 
-            //Start the main screen
-            Intent intent = new Intent(context, Activity_Main_Page.class);
-            context.startActivity(intent);
 
-            //Print a welcome message
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, "WELCOME " + username + "!", duration);
-            toast.show();
+        //If we are only testing
+        if(test) {
 
+            //If the task went through
+            if(results.equals("true")) {
+
+                test_result = test_result.append("Attempt Login with an existing user:\n" +
+                        " Passed\n");
+                test_screen.setText(test_result.toString());
+
+            }
+
+            //If the task did not go through
+            else {
+                test_result.append("Attempt Login with a non existing user:\n" +
+                        " Passed\n");
+                test_screen.setText(test_result.toString());
+
+
+
+            }
 
         }
 
-        //If the user is not authenticated
+        //If we are not testing
         else {
-            //Print an error
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, "Invalid Username or Password!", duration);
-            toast.show();
+
+            //If the user is authenticated
+            if (results.equals("true")) {
+                //Store the username
+                username = user.getText().toString();
+
+                //Start the main screen
+                Intent intent = new Intent(context, Activity_Main_Page.class);
+                context.startActivity(intent);
+
+                //Print a welcome message
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, "WELCOME " + username + "!", duration);
+                toast.show();
+
+
+            }
+
+            //If the user is not authenticated
+            else {
+                //Print an error
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, "Invalid Username or Password!", duration);
+                toast.show();
+
+            }
 
         }
 

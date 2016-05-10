@@ -20,6 +20,7 @@ import android.text.Html;
 import android.util.Log;
 
 //For modifying a text view
+import android.widget.EditText;
 import android.widget.TextView;
 
 
@@ -77,6 +78,11 @@ public class Async_Recieve_Messages extends AsyncTask<String, Void, String> {
      */
     TextView chatText;
 
+    //Variables for testing
+    private boolean test;
+    private StringBuffer  test_result;
+    private EditText test_screen;
+
 
     /**
      *Create a new enum for get and post requests
@@ -92,8 +98,11 @@ public class Async_Recieve_Messages extends AsyncTask<String, Void, String> {
      *
      * @param chatText the TextView to be modified with all the messages from the chat
      * @param state the Action which the instance variable state will be set to (represents the HTTP request method, get or post)
+     * @param t - Boolean passed in
+     * @param text - Textview with test results
+     * @param test_res - String holding test results
      */
-    public Async_Recieve_Messages(TextView chatText, ACTION state)
+    public Async_Recieve_Messages(TextView chatText, ACTION state, boolean t, EditText text, StringBuffer  test_res)
     {
         //Store the state to whatever was passed in as a parameter
         this.state = state;
@@ -106,7 +115,41 @@ public class Async_Recieve_Messages extends AsyncTask<String, Void, String> {
 
         //Create an instace of the HttpGet class
         this.req = new HttpGet();
+
+        test = t;
+        test_screen = text;
+        test_result = test_res;
+
     }
+
+    /**
+     * Instantiates instance variables <code>state</code>,<code>chatText</code>,<code>client</code>, <code>test</code>, and <code>req</code>
+     *
+     * @param chatText the TextView to be modified with all the messages from the chat
+     * @param state the Action which the instance variable state will be set to (represents the HTTP request method, get or post)
+     * @param t - Boolean passed in
+
+     */
+    public Async_Recieve_Messages(TextView chatText, ACTION state, boolean t)
+    {
+        //Store the state to whatever was passed in as a parameter
+        this.state = state;
+
+        //Store the chatText to whatever was passed in as a parameter
+        this.chatText = chatText;
+
+        //Create an instace of the DefaulthttpClient class
+        this.client = new DefaultHttpClient();
+
+        //Create an instace of the HttpGet class
+        this.req = new HttpGet();
+
+        test = t;
+
+
+    }
+
+
 
 
     /**
@@ -116,8 +159,20 @@ public class Async_Recieve_Messages extends AsyncTask<String, Void, String> {
      */
     protected void onPostExecute(String results)
     {
-        //Set the text of the chat text to the results passed in as a parameter in the form of an html page
-        this.chatText.setText(Html.fromHtml(results));
+
+        //If we are only testing
+        if(test) {
+
+        }
+
+        //If we are not testing
+        else {
+
+            //Set the text of the chat text to the results passed in as a parameter in the form of an html page
+            this.chatText.setText(Html.fromHtml(results));
+        }
+
+
     }
 
     /**

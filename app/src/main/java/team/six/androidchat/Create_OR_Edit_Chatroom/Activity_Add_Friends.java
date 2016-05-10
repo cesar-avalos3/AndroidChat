@@ -87,7 +87,7 @@ public class Activity_Add_Friends extends AppCompatActivity {
         Context context = getApplicationContext();
 
         //Use Async_Add_Friends to handle adding the friend to the room
-        new Async_Add_Friends(context).execute(room,user_to_add);
+        new Async_Add_Friends(context,false).execute(room,user_to_add);
 
 
 

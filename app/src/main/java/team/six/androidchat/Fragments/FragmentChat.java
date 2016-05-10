@@ -160,7 +160,7 @@ public class FragmentChat extends Fragment
         //Create an instance of the Async_Recieve_Messages  Class
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
-        new Async_Recieve_Messages(session_messages, Async_Recieve_Messages.ACTION.GET).execute(currentSessionNumber);
+        new Async_Recieve_Messages(session_messages, Async_Recieve_Messages.ACTION.GET,false).execute(currentSessionNumber);
     }
 
     /**
@@ -176,7 +176,7 @@ public class FragmentChat extends Fragment
         //Create an instance of the Sending Message Class
         //Pass in get to submit an HTTP get request
         //Call the execute method of the AsyncTask Class to execute the doInBackground method
-        new Async_Send_Messages().execute(currentSessionNumber,stringToAdd,authorToAdd);
+        new Async_Send_Messages(false).execute(currentSessionNumber,stringToAdd,authorToAdd);
     }
 
 

@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -27,6 +28,7 @@ import java.net.URLEncoder;
 import team.six.androidchat.Activity_Login_Page;
 import team.six.androidchat.Activity_Main_Page;
 import team.six.androidchat.Validating_User.Verify_Existing_User;
+import team.six.androidchat.testSuite.Activity_Test;
 
 /**
  * <p>
@@ -50,6 +52,11 @@ public class Async_Add_Account extends AsyncTask<String, Void, String>  {
     //Url of the associated php file which interacts with SQL
     URL url;
 
+    //Variables for testing
+    private boolean test;
+    private StringBuffer test_result;
+    private EditText test_screen;
+
     //Context the will be intiialized in the constructor
     private Context context;
 
@@ -57,8 +64,32 @@ public class Async_Add_Account extends AsyncTask<String, Void, String>  {
      * Initalizes the context variable
      *
      * @param c Context passed in
+     * @param t - Boolean passed in
+     * @param text - Textview with test results
+     * @param test_res - String holding test results
      */
-    public Async_Add_Account(Context c) {
+    public Async_Add_Account(Context c, boolean t, EditText text, StringBuffer test_res) {
+
+        test = t;
+        test_screen = text;
+        test_result = test_res;
+
+
+        this.context = c;
+    }
+
+
+    /**
+     * Inialize all varaibles except test variables
+     *
+     * @param c Context passed in
+     * @param t - Boolean passed in
+     */
+    public Async_Add_Account(Context c, boolean t) {
+
+        test = t;
+
+
         this.context = c;
     }
 
@@ -68,31 +99,60 @@ public class Async_Add_Account extends AsyncTask<String, Void, String>  {
      *
      * @param results Either "true" or "false" depending on what is returned from doInBackground
      */
+    @Override
     protected void onPostExecute(String results){
 
-        //If the request did not go through (the user already exists), print a toast
-        if(results.equals("true")) {
+        //If we are only testing
+        if(test) {
 
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, "Username already exists!", duration);
-            toast.show();
+            //If the task did not go through
+            if(results.equals("true")) {
+
+                test_result = test_result.append("Attempt Create account on already existing user:\n" +
+                        " Passed\n");
+                test_screen.setText(test_result.toString());
+
+            }
+
+            //If the task went through
+            else {
+                test_result = test_result.append("Attempt Create account on a nonexisting user:\n" +
+                        " Passed\n");
+                test_screen.setText(test_result.toString());
+
+
+
+            }
+
         }
 
-        //If the request went through and the database was updated, print a toast and start a new activity
+        //If we are not testing
         else {
 
-            //Print toast
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, "User created!", duration);
-            toast.show();
+            //If the request did not go through (the user already exists), print a toast
+            if(results.equals("true")) {
+
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, "Username already exists!", duration);
+                toast.show();
+            }
+
+            //If the request went through and the database was updated, print a toast and start a new activity
+            else {
+
+                //Print toast
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, "User created!", duration);
+                toast.show();
 
 
-            //Start activity
-            Intent intent = new Intent(context, Activity_Login_Page.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+                //Start activity
+                Intent intent = new Intent(context, Activity_Login_Page.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
 
 
+            }
         }
 
 
@@ -102,6 +162,7 @@ public class Async_Add_Account extends AsyncTask<String, Void, String>  {
      *Implementation of AsyncTask Interface method
      *
      */
+    @Override
     protected void onPreExecute(){}
 
     /**
@@ -110,6 +171,7 @@ public class Async_Add_Account extends AsyncTask<String, Void, String>  {
      * @param arg0 the String... represents an array of strings which can be of varying length [represents session_num in this case].
      * @return returns "true" if request did not go through, returns "false" otherwise
      */
+    @Override
     protected String doInBackground(String... arg0)
     {
         //Store username and password passed in as a parameter
